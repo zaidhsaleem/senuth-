@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PROFILE PAGE</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    
+    <body>
+        <h1>Your profile</h1>
+
+         <div id="profile-img-section">
+            <h2>Profile Image</h2>
+        <input type="file" id="profile-image" accept="image/*"><br>
+        <img id="selected-image" src="" alt="Your Profile Image" style="width: 100px; height: 100px; display:block;">
+        </div>
+
+        <div id="profile-container">
+            <div id="progress-bar">
+                <p id="steps-completed">Steps completed: 0/4</p>
+                <progress id="progress" value="0" max="100"></progress>
+                <p id="percent-filled">Percentage Completed: 0%</p>
+            </div>
+
+            <div id="section-personal-details" style="display:none;">
+                <h2>Personal details</h2>
+                <p>Name: <span id="name"></span></p>
+                <p>Username: <span id="username"></span></p>
+                <p>Role: <span id="role"></span></p>
+                <p>Email: <span id="email"></span></p>
+                <p>ID Card: <span id="IDCard"></span></p>   
+                <p>Phone number: <span id="tele"></span></p>
+                <p>Country: <span id="country"></span></p>
+                <p>Address: <span id="address"></span></p>
+            </div>
+
+            <div id="section-interests" style="display:none;">
+                <h2>Interests or preferences</h2>
+                <p>Interests: <span id="interests"></span></p>
+                <p>Preferences: <span id="preferences"></span></p>
+                <p>Hobbies: <span id="hobbies"></span></p>
+            </div>
+
+            <div id="section-actions" style="display:none;">
+                <h2>Goals/Actions taken/Tasks</h2>
+                <p>Goals: <span id="goals"></span></p>
+                <p>Actions taken: <span id="actions"></span></p>
+                <p>Tasks: <span id="tasks"></span></p>
+            </div>
+
+        <button id="fill-skipped" style="display:none;">Fill in skipped sections</button> 
+        
+        </div>
+
+        </body>
+
+
+
+        <script>
+            //profile image upload (this part was referenced through Claude code generation and adapted to fit the rest of the code)
+            document.getElementById("selected-image").onchange = function(){
+                let file =this.files[0];
+                let reader = new FileReader();
+                reader.onload = function(e){
+                    document.getElementById("selected-image").src = e.target.result; //display the selected image in the profile page
+                    document.getElementById("selected-image").style.display = "block"; //display the image element after selecting an image
+                    profile.image = e.target.result; //storing the image data in the profile object so we can check later if it was filled or skipped
+                };
+                reader.readAsDataURL(file); //read the selected file as a data URL so we can display it in the profile page
+            };
+            
+            //profile object
+
+            let profile = {
+                name: null,
+                username: null,
+                role: null,
+                email: null,
+                IDCard: null,
+                tele: null,
+                country: null,
+                address: null,
+                interests: null,
+                preferences: null,
+                hobbies: null,
+                actions: null,
+                goals: null,
+                tasks: null
+            };
+
+
+            //function to update the progress bar and percentage filled
+            let totalSteps = 3;
+            function updateProgress(filled, total){ //stepsFilledis the variable we make to keep track of how many steps the user has completed
+                let percent = Math.round(filled / total * 100); //percent is the variable we make to calculate the percentage filled based on the steps filled and total steps
+
+                document.getElementById("steps-completed").textContent = "Steps completed: " + filled + "/" + total; //steps-completed is the id of the element we use to display the steps completed and total steps
+                document.getElementById("progress").value = percent; //progress is the id of the progress bar element and we set its value to the percentage filled
+                document.getElementById("percent-filled").textContent = "Percentage Completed: " + percent.toFixed(2) + "%";  //percent-filled is the id of the element we use to display the percentage filled and we set its text content to the percentage filled followed by a percentage sign & tofixed(2) is used to round the percentage to 2 decimal places
+            }
+
+            function isSectionComplete(fields){
+                for(let i = 0; i<fields.length; i++){
+                    if(fields[i] === null || fields[i] === ""){
+                        return false; //atleast one field was skiped
+                    }
+                }
+                return true; //all fields filled
+            }
+
+            //function to recalculate the progress bar based on the filled fields
+            function recalculateProgress(){
+                let completedSteps = 0;
+
+                if(isSectionComplete([
+                    profile.name, profile.username, profile.role, 
+                    profile.email, profile.IDCard, profile.tele,
+                    profile.country, profile.address])) completedSteps++; //if all personal details fields are filled we consider that the user has completed the first step
+                if(isSectionComplete([
+                    profile.interests, profile.preferences, profile.hobbies])) completedSteps++; //if all interests fields are filled we consider that the user has completed the second step
+                if(isSectionComplete([
+                    profile.actions, profile.goals, profile.tasks])) completedSteps++; //if all actions taken fields are filled we consider that the user has completed the third step
+
+                updateProgress(completedSteps, totalSteps); //update the progress bar with the new number of steps filled
+            }
+
+
+            //Personal details
+
+            let name =prompt("Please enter your name(letters only):");
+            while(name !==null && /\d/.test(name.trim())){
+                name = prompt("Please enter a valid name(letters only):");
+            }
+
+            if(name !== null && name.trim() !== ""){
+                profile.name = name; //storing the name in the profile object so we can check later if it was filled or skipped
+                document.getElementById("name").textContent = name; //displaying the name in the profile page
+                document.getElementById("name").style.display = "block"; //displaying the name element after filling in the details
+            }
+            else{
+                profile.name = null;
+                document.getElementById("name").style.display = "none"; //hiding the name element if the user skips it
+            }
+
+
+            let userName = prompt("Please enter your Username(no spaces, max 15 characters)):");
+            while(userName !== null && (userName.trim() === "" || userName.trim().length > 15 || userName.includes(" ") ) ){
+                userName = prompt("Please enter a valid Username(no spaces, max 15 characters)):");
+            }
+
+            if(userName !== null && userName.trim() !== ""){
+                profile.username = userName; //storing the username in the profile object so we can check later if it was filled or skipped
+                document.getElementById("username").textContent = userName; //displaying the username in the profile page
+                document.getElementById("username").style.display = "block"; //displaying the username element after filling in the details
+            }
+            else{
+                profile.username = null;
+                document.getElementById("username").style.display = "none"; //hiding the username element if the user skips it
+            }
+
+            let role=prompt("Please enter your role:");
+            while (role !== null && /\d/.test(role.trim())){
+                role = prompt("Please enter a valid role (only letters and spaces):");
+            }
+
+            if(role !== null && role.trim() !== ""){
+                profile.role = role; //storing the role in the profile object so we can check later if it was filled or skipped
+                document.getElementById("role").textContent = role; //displaying the role in the profile page
+                document.getElementById("role").style.display = "block"; //displaying the role element after filling in the details
+            }
+            else{
+                profile.role = null;
+                document.getElementById("role").style.display = "none"; //hiding the role element if the user skips it
+            }
+
+            //Personal details --> Other details
+            let userEmail = prompt("Please enter your email:");
+            while(userEmail !== null && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail.trim())){
+                userEmail = prompt("Please enter a valid email eg: name@example.com:");
+            }
+            if(userEmail !== null && userEmail.trim() !== ""){
+                profile.email = userEmail; //storing the email in the profile object so we can check later if it was filled or skipped
+                document.getElementById("email").textContent = userEmail; //displaying the email in the profile page
+                document.getElementById("email").style.display = "block"; //displaying the email element after filling in the details
+            }
+            else{
+                profile.email = null;
+                document.getElementById("email").style.display = "none"; //hiding the email element if the user skips it
+            }
+
+            let userId = prompt("Please enter your ID:");
+            if(userId !== null && userId.trim() !== ""){
+                profile.IDCard = userId; //storing the ID in the profile object so we can check later if it was filled or skipped
+                document.getElementById("IDCard").textContent = userId; //displaying the ID in the profile page
+                document.getElementById("IDCard").style.display = "block"; //displaying the ID element after filling in the details
+            }
+            else{
+                profile.IDCard = null;
+                document.getElementById("IDCard").style.display = "none"; //hiding the ID element if the user skips it
+            }
+
+            let userPhone = prompt("Please enter your phone number:");
+            while(userPhone !== null && !/^\d{10}$/.test(userPhone.trim())){
+                userPhone = prompt("Please enter a valid phone number (10 digits):");
+            }
+
+            if(userPhone !== null && userPhone.trim() !== ""){
+                profile.tele = userPhone; //storing the phone number in the profile object so we can check later if it was filled or skipped
+                document.getElementById("tele").textContent = userPhone; //displaying the phone number in the profile page
+                document.getElementById("tele").style.display = "block"; //displaying the phone number element after filling in the details
+            }
+            else{
+                profile.tele = null;
+                document.getElementById("tele").style.display = "none"; //hiding the phone number element if the user skips it
+            }
+
+            let userCountry = prompt("Please enter your country(only letters  and spaces):");
+            while (userCountry !== null && /\d/.test(userCountry.trim())){
+                userCountry = prompt("Please enter a valid country name (only letters and spaces):");
+            }
+
+            if(userCountry !== null && userCountry.trim() !== ""){
+                profile.country = userCountry; //storing the country in the profile object so we can check later if it was filled or skipped
+                document.getElementById("country").textContent = userCountry; //displaying the country in the profile page
+                document.getElementById("country").style.display = "block"; //displaying the country element after filling in the details
+            }
+            else{
+                profile.country = null;
+                document.getElementById("country").style.display = "none"; //hiding the country element if the user skips it
+            }
+
+            let userAddress = prompt("Please enter your address:");
+            if(userAddress !== null && userAddress.trim() !== ""){
+                profile.address = userAddress; //storing the address in the profile object so we can check later if it was filled or skipped
+                document.getElementById("address").textContent = userAddress; //displaying the address in the profile page
+                document.getElementById("address").style.display = "block"; //displaying the address element after filling in the details
+            }
+            else{
+                profile.address = null;
+                document.getElementById("address").style.display = "none"; //hiding the address element if the user skips it
+            }
+
+            document.getElementById("section-personal-details").style.display = "block"; //displaying the personal details section after filling in the details
+            let personalDetailsComplete = isSectionComplete([
+                profile.name, profile.username, profile.role, 
+                profile.email, profile.IDCard, profile.tele,
+                profile.country, profile.address]); //checking if all personal details fields are filled  
+
+            let completedSteps = 0;
+            if(personalDetailsComplete) completedSteps++; //if all personal details fields are filled we consider that the user has completed the first step
+            updateProgress(completedSteps, totalSteps); 
+
+
+            //Interests or  preferences
+            let userInterests = prompt("Please enter your interests or preferences:");
+            if(userInterests !== null && userInterests.trim() !== ""){
+                profile.interests = userInterests; //storing the interests in the profile object so we can check later if it was filled or skipped
+                document.getElementById("interests").textContent = userInterests; //displaying the interests in the profile page
+                document.getElementById("interests").style.display = "block"; //displaying the interests element after filling in the details
+            }
+            else{
+                profile.interests = null;
+                document.getElementById("interests").style.display = "none"; //hiding the interests element if the user skips it
+            }
+
+
+            let preferences = prompt("Please enter your preferences:");
+            if(preferences !== null && preferences.trim() !== ""){
+                profile.preferences = preferences; //storing the preferences in the profile object so we can check later if it was filled or skipped
+                document.getElementById("preferences").textContent = preferences; //displaying the preferences in the profile page
+                document.getElementById("preferences").style.display = "block"; //displaying the preferences element after filling in the details
+            }
+            else{
+                profile.preferences = null;
+                document.getElementById("preferences").style.display = "none"; //hiding the preferences element if the user skips it
+            }
+
+            let hobbies = prompt("Please enter your hobbies:");
+            if(hobbies !== null && hobbies.trim() !== ""){
+                profile.hobbies = hobbies; //storing the hobbies in the profile object so we can check later if it was filled or skipped
+                document.getElementById("hobbies").textContent = hobbies; //displaying the hobbies in the profile page
+                document.getElementById("hobbies").style.display = "block"; //displaying the hobbies element after filling in the details
+            }
+            else{
+                profile.hobbies = null;
+                document.getElementById("hobbies").style.display = "none"; //hiding the hobbies element if the user skips it
+            }
+
+            document.getElementById("section-interests").style.display = "block"; //displaying the interests section after filling in the details
+            let interestsComplete = isSectionComplete([
+                profile.interests, profile.preferences, profile.hobbies]); //checking if all interests fields are filled  
+
+            if(interestsComplete) completedSteps++; //if all interests fields are filled we consider that the user has completed the second step
+            updateProgress(completedSteps, totalSteps);
+
+
+            //Ations taken/Goals/Tasks
+            let userActions = prompt("Please enter your actions taken:");
+            if(userActions !== null && userActions.trim() !== ""){
+                profile.actions = userActions; //storing the actions taken in the profile object so we can check later if it was filled or skipped
+                document.getElementById("actions").textContent = userActions; //displaying the actions taken in the profile page
+                document.getElementById("actions").style.display = "block"; //displaying the actions taken element after filling in the details
+            }
+            else{
+                profile.actions = null;
+                document.getElementById("actions").style.display = "none"; //hiding the actions taken element if the user skips it
+            }
+
+
+            let goals = prompt("Please enter your goals:");
+            if(goals !== null && goals.trim() !== ""){
+                profile.goals = goals; //storing the goals in the profile object so we can check later if it was filled or skipped
+                document.getElementById("goals").textContent = goals; //displaying the goals in the profile page
+                document.getElementById("goals").style.display = "block"; //displaying the goals element after filling in the details
+            }
+            else{
+                profile.goals = null;
+                document.getElementById("goals").style.display = "none"; //hiding the goals element if the user skips it
+            }
+
+
+            let tasks = prompt("Please enter your tasks:");
+            if(tasks !== null && tasks.trim() !== ""){
+                profile.tasks = tasks; //storing the tasks in the profile object so we can check later if it was filled or skipped
+                document.getElementById("tasks").textContent = tasks; //displaying the tasks in the profile page
+                document.getElementById("tasks").style.display = "block"; //displaying the tasks element after filling in the details
+            }
+            else{
+                profile.tasks = null;
+                document.getElementById("tasks").style.display = "none"; //hiding the tasks element if the user skips it
+            }
+
+            document.getElementById("section-actions").style.display = "block"; //displaying the actions taken section after filling in the details
+            let actionsComplete = isSectionComplete([
+                profile.actions, profile.goals, profile.tasks]); //checking if all actions taken fields are filled
+            
+            if(actionsComplete) completedSteps++; //if all actions taken fields are filled we consider that the user has completed the third step
+            updateProgress(completedSteps, totalSteps);
+
+        
+            //function to check for skipped fields
+            function returnToSkipped(){
+                let filled = false;
+                
+                //name retry logic
+                if (profile.name == null){
+                    let retry = prompt("You have skipped the name field. Enter now or press cancel to skip again.");
+                    if (retry !== null && retry.trim() !== ""){
+                        profile.name = retry;
+                        document.getElementById("name").textContent = retry;
+                        document.getElementById("name").style.display = "block";
+                        filled = true;
+                    }
+                }
+
+                    //userName retry logic
+                if (profile.username == null){
+                        let retry = prompt("You have skipped the username field. Enter now or press cancel to skip again.");
+                        if (retry !== null && retry.trim() !== ""){
+                            profile.username = retry;
+                            document.getElementById("username").textContent = retry;
+                            document.getElementById("username").style.display = "block";
+                            filled = true;
+                        }
+                    }
+
+                    //role retry logic
+                if (profile.role == null){
+                        let retry = prompt("You have skipped the role field. Enter now or press cancel to skip again.");
+                        if (retry !== null && retry.trim() !== ""){
+                            profile.role = retry;
+                            document.getElementById("role").textContent = retry;
+                            document.getElementById("role").style.display = "block";
+                            filled = true;
+                        }
+                    }
+
+                    //email retry logic
+                if (profile.email == null){
+                        let retry = prompt("You have skipped the email field. Enter now or press cancel to skip again.");
+                        if (retry !== null && retry.trim() !== ""){
+                            profile.email = retry;
+                            document.getElementById("email").textContent = retry;
+                            document.getElementById("email").style.display = "block";
+                            filled = true;
+                        }
+                    }
+
+                    //IDCard retry logic
+                if (profile.IDCard == null){
+                        let retry = prompt("You have skipped the ID Card field. Enter now or press cancel to skip again.");
+                        if (retry !== null && retry.trim() !== ""){
+                            profile.IDCard = retry;
+                            document.getElementById("IDCard").textContent = retry;
+                            document.getElementById("IDCard").style.display = "block";
+                            filled = true;
+                        }
+                    }
+
+                    //tele retry logic
+                if (profile.tele == null){
+                        let retry = prompt("You have skipped the phone number field. Enter now or press cancel to skip again.");
+                        if (retry !== null && retry.trim() !== ""){
+                            profile.tele = retry;
+                            document.getElementById("tele").textContent = retry;
+                            document.getElementById("tele").style.display = "block";
+                            filled = true;
+                        }
+                    }
+
+                //country retry logic
+                if (profile.country == null){
+                        let retry = prompt("You have skipped the country field. Enter now or press cancel to skip again.");
+                        if (retry !== null && retry.trim() !== ""){
+                            profile.country = retry;
+                            document.getElementById("country").textContent = retry;
+                            document.getElementById("country").style.display = "block";
+                            filled = true;
+                        }
+                    }
+
+                //address retry logic
+                if (profile.address == null){
+                        let retry = prompt("You have skipped the address field. Enter now or press cancel to skip again.");
+                        if (retry !== null && retry.trim() !== ""){
+                            profile.address = retry;
+                            document.getElementById("address").textContent = retry;
+                            document.getElementById("address").style.display = "block";
+                            filled = true;
+                        }
+                }
+
+                //interests retry logic
+                if (profile.interests == null){
+                    let retry = prompt("You have skipped the interests field. Enter now or press cancel to skip again.");
+                    if (retry !== null && retry.trim() !== ""){
+                        profile.interests = retry;
+                        document.getElementById("interests").textContent = retry;
+                        document.getElementById("interests").style.display = "block";
+                        filled = true;
+                    }
+                }
+
+                //preferences retry logic
+                if (profile.preferences == null){
+                    let retry = prompt("You have skipped the preferences field. Enter now or press cancel to skip again.");
+                    if (retry !== null && retry.trim() !== ""){
+                        profile.preferences = retry;
+                        document.getElementById("preferences").textContent = retry;
+                        document.getElementById("preferences").style.display = "block";
+                        filled = true;
+                    }
+                }
+
+                //hobbies retry logic
+                if (profile.hobbies == null){
+                    let retry = prompt("You have skipped the hobbies field. Enter now or press cancel to skip again.");
+                    if (retry !== null && retry.trim() !== ""){
+                        profile.hobbies = retry;
+                        document.getElementById("hobbies").textContent = retry;
+                        document.getElementById("hobbies").style.display = "block";
+                        filled = true;
+                    }
+                }
+
+                //actions retry logic
+                if (profile.actions == null){
+                    let retry = prompt("You have skipped the actions taken field. Enter now or press cancel to skip again.");
+                    if (retry !== null && retry.trim() !== ""){
+                        profile.actions = retry;
+                        document.getElementById("actions").textContent = retry;
+                        document.getElementById("actions").style.display = "block";
+                        filled = true;
+                    }
+                }
+
+                //goals retry logic
+                if (profile.goals == null){
+                    let retry = prompt("You have skipped the goals field. Enter now or press cancel to skip again.");
+                    if (retry !== null && retry.trim() !== ""){
+                        profile.goals = retry;
+                        document.getElementById("goals").textContent = retry;
+                        document.getElementById("goals").style.display = "block";
+                        filled = true;
+                    }
+                }
+
+                //tasks retry logic
+                if (profile.tasks == null){
+                    let retry = prompt("You have skipped the tasks field. Enter now or press cancel to skip again.");
+                    if (retry !== null && retry.trim() !== ""){
+                        profile.tasks = retry;
+                        document.getElementById("tasks").textContent = retry;
+                        document.getElementById("tasks").style.display = "block";
+                        filled = true;
+                    }
+                }
+
+                //after checking all fields if any were filled we call the function to recalculate the progress bar
+                if(filled){
+                    recalculateProgress(); //function to recalculate the progress bar based on the filled fields
+                }
+            }
+            
+            document.getElementById("fill-skipped").style.display = "block"; //display the button to allow the user to fill in any skipped sections
+            document.getElementById("fill-skipped").onclick = returnToSkipped; //call the function to return to skipped sections when clicked
+            
+
+        </script>
+    </body>
+</html>
