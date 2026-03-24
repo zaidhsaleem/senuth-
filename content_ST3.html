@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================================
+       CONTENT PAGE — SDG 10: Reducing Inequalities
+       File: content_ST3.html
+       Author: Senuth Hansira Karunaratne — Student 3
+       Description: Content page focusing on Language and Literacy
+       Barriers as a key dimension of inequality under SDG 10.
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Language &amp; Literacy Barriers — SDG 10 | EqualWorld</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+
+  <!-- ============================================================
+       GLOBAL CSS (style.css in full project)
+  ============================================================ -->
+  <style>
+    /* ── CSS VARIABLES ── */
+    :root {
+      --bg:         #f5f0e8;
+      --ink:        #1a1a2e;
+      --accent:     #c0392b;
+      --accent2:    #e67e22;
+      --card:       #fffdf7;
+      --nav-bg:     #1a1a2e;
+      --nav-text:   #f5f0e8;
+      --footer-bg:  #1a1a2e;
+      --muted:      #7a7a8c;
+      --border:     #d4c9b0;
+      --font-display: 'Playfair Display', serif;
+      --font-body:    'Source Serif 4', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ── GLOBAL HEADER ── */
+    header {
+      background: var(--nav-bg);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    nav {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem; height: 64px;
+    }
+    .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; color: var(--nav-text); text-decoration: none; }
+    .nav-logo span { color: var(--accent2); }
+    .nav-links { display: flex; list-style: none; gap: 1.8rem; }
+    .nav-links a { color: var(--nav-text); text-decoration: none; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s, color 0.2s; padding-bottom: 3px; border-bottom: 2px solid transparent; }
+    .nav-links a:hover { opacity: 1; color: var(--accent2); border-bottom-color: var(--accent2); }
+    .nav-links a.active { opacity: 1; color: var(--accent2); border-bottom-color: var(--accent2); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--nav-text); }
+
+    /* ── GLOBAL FOOTER ── */
+    footer { background: var(--footer-bg); color: var(--nav-text); padding: 2.5rem 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-brand p { font-size: 0.87rem; opacity: 0.6; line-height: 1.7; margin-top: 0.5rem; }
+    .footer-col h4 { font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.8rem; color: var(--accent2); letter-spacing: 0.05em; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .footer-col ul li a { color: rgba(245,240,232,0.65); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--accent2); }
+    .footer-bottom { max-width: 1200px; margin: 1.5rem auto 0; display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.5; }
+  </style>
+
+  <!-- ============================================================
+       PAGE-SPECIFIC EMBEDDED CSS
+       Applies only to this content page
+  ============================================================ -->
+  <style>
+
+    /* 1. Hero banner */
+    .content-hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
+      color: #f5f0e8; padding: 4.5rem 2rem 3.5rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .content-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E"); }
+    .content-hero .sdg-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1.2rem; }
+    .content-hero h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.15; max-width: 780px; margin: 0 auto 1rem; }
+    .content-hero h1 em { font-style: italic; color: var(--accent2); }
+    .content-hero p { font-size: 1.05rem; opacity: 0.8; max-width: 540px; margin: 0 auto; }
+
+    /* 2. Two-column page layout */
+    .page-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      max-width: 1100px;
+      margin: 0 auto;
+      gap: 2.5rem;
+      padding: 3rem 2rem 5rem;
+      align-items: start;
+    }
+
+    /* 3. Sticky side navigation */
+    .side-nav {
+      position: sticky; top: 84px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px; padding: 1.25rem;
+    }
+    .side-nav h3 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent); }
+    .side-nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .side-nav ul li a { font-size: 0.87rem; color: var(--ink); text-decoration: none; display: block; padding: 0.3rem 0.5rem; border-radius: 3px; transition: background 0.2s, color 0.2s; opacity: 0.75; }
+
+    /* 4. Side nav hover effect */
+    .side-nav ul li a:hover { background: var(--accent); color: #fff; opacity: 1; }
+
+    /* 5. Content headings */
+    .content-area h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.2; margin-bottom: 0.5rem; color: var(--ink); }
+    .content-area h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin-bottom: 1rem; color: var(--ink); padding-top: 0.5rem; }
+    .content-area h3 { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--accent); margin-bottom: 0.75rem; }
+
+    /* 6. Section divider */
+    .section-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; margin: 1.5rem 0 2rem; }
+
+    /* 7. Paragraphs */
+    .content-area p { font-size: 1.02rem; line-height: 1.88; color: #2c2c3e; margin-bottom: 1.1rem; }
+    .content-area p:last-child { margin-bottom: 0; }
+
+    /* 8. Content sections */
+    .content-section { margin-bottom: 4rem; animation: fadeUp 0.5s ease both; }
+
+    /* 9. Section badge */
+    .section-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--ink); color: var(--nav-text); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 2px; margin-bottom: 1rem; }
+
+    /* 10. Content images */
+    .content-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin: 1.25rem 0;
+      display: block;
+    }
+
+    /* 11. Two-image grid */
+    .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.25rem 0; }
+
+    /* 12. Dark callout card */
+    .callout-card { background: var(--ink); color: var(--nav-text); border-radius: 6px; padding: 2rem; margin: 2rem 0; }
+    .callout-card h3 { font-family: var(--font-display); color: var(--accent2); font-style: normal; font-size: 1.2rem; margin-bottom: 1rem; }
+    .callout-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .callout-card ul li { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.97rem; line-height: 1.6; }
+    .callout-card ul li::before { content: '→'; color: var(--accent2); font-weight: 700; flex-shrink: 0; }
+
+    /* 13. Conclusion block */
+    .conclusion-block { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 2.5rem; text-align: center; }
+    .conclusion-block h2 { font-family: var(--font-display); font-size: 1.9rem; font-weight: 800; margin-bottom: 1rem; }
+    .conclusion-block h2 span { color: var(--accent); }
+    .conclusion-block .final-quote { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--accent); margin-top: 1.5rem; }
+
+    /* 14. Intro block with left border */
+    .intro-block { border-left: 4px solid var(--accent); padding-left: 1.5rem; margin-bottom: 2rem; }
+    .intro-block p { font-size: 1.1rem; line-height: 1.9; color: #2c2c3e; }
+
+    /* Go to Top — CSS only, position fixed */
+    .go-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--accent); color: #fff; text-decoration: none; font-family: var(--font-display); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.65rem 1rem; border-radius: 4px; box-shadow: 0 4px 15px rgba(192,57,43,0.35); transition: background 0.2s, transform 0.2s; z-index: 200; }
+    .go-top:hover { background: #a93226; transform: translateY(-2px); }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .content-section:nth-child(1) { animation-delay: 0.05s; }
+    .content-section:nth-child(2) { animation-delay: 0.15s; }
+    .content-section:nth-child(3) { animation-delay: 0.25s; }
+    .content-section:nth-child(4) { animation-delay: 0.35s; }
+    .content-section:nth-child(5) { animation-delay: 0.45s; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-layout { grid-template-columns: 1fr; padding: 2rem 1.25rem 4rem; }
+      .side-nav { position: static; margin-bottom: 1.5rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--nav-bg); padding: 1rem 2rem 1.5rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .img-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       HEADER — Shared Template
+  ══════════════════════════════════════ -->
+  <header>
+    <nav>
+      <a href="home.html" class="nav-logo">Equal<span>World</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="ais.html">Action Simulator</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="sitemap.html">Sitemap</a></li>
+        <li><a href="content_ST3.html" class="active" aria-current="page">Our SDG</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       HERO BANNER
+  ══════════════════════════════════════ -->
+  <div class="content-hero" id="top">
+    <div class="sdg-badge">SDG 10 - Team Align - Reduced Inequalities</div>
+    <h1>Breaking Down <em>Language &amp; Literacy Barriers</em>: A Path Towards Equality</h1>
+    <p>Exploring how language and literacy inequality affects communities worldwide — and what we can do about it.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       MAIN
+  ══════════════════════════════════════ -->
+  <main>
+    <div class="page-layout">
+
+      <!-- SIDE NAVIGATION — internal anchor links -->
+      <aside class="side-nav" aria-label="Page sections navigation">
+        <h3>On This Page</h3>
+        <ul>
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#problem">The Problem</a></li>
+          <li><a href="#education">Impact on Education</a></li>
+          <li><a href="#healthcare">Impact on Healthcare</a></li>
+          <li><a href="#solutions">Solutions</a></li>
+          <li><a href="#take-action">Take Action</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+      </aside>
+
+      <!-- CONTENT AREA -->
+      <div class="content-area">
+
+        <!-- SECTION 1: Introduction -->
+        <section class="content-section" id="introduction">
+          <div class="section-badge"><span>🌍</span> Introduction</div>
+          <h1>Language &amp; Literacy Barriers: The Invisible Wall of Inequality</h1>
+          <div class="section-divider"></div>
+
+          <div class="intro-block">
+            <p>Language is the foundation of human connection — it shapes how we learn, how we access services, and how we participate in society. Yet for millions of people around the world, language and literacy barriers create invisible walls that lock them out of education, healthcare, employment, and equal opportunities. This is one of the most overlooked dimensions of inequality addressed by SDG 10.</p>
+          </div>
+
+          <p>Literacy is not simply the ability to read and write — it is the key to participation in modern society. When people cannot read a contract, understand a medical prescription, navigate a government website, or communicate in the dominant language of their country, they are systematically excluded from the opportunities that others take for granted.</p>
+
+          <p>SDG 10 — Reducing Inequalities — calls us to address these deep structural barriers. Language and literacy inequality is not just an individual failing; it is a social problem rooted in history, policy, and power. Recognising this is the first step toward change.</p>
+
+          <!-- Image 1 -->
+          <img
+            class="content-img"
+            src="reading_book.jpeg"
+            alt="A person reading a book, representing the importance of literacy in reducing inequality"
+          />
+        </section>
+
+        <!-- SECTION 2: The Problem -->
+        <section class="content-section" id="problem">
+          <div class="section-badge"><span>⚠️</span> The Problem</div>
+          <h2>Understanding the Scale of Language &amp; Literacy Inequality</h2>
+          <div class="section-divider"></div>
+
+          <p>According to UNESCO, approximately 773 million adults worldwide lack basic literacy skills — the majority of whom are women. In many developing countries, minority language speakers and indigenous communities face the additional barrier of being educated or served in a language that is not their mother tongue, making learning and access even harder.</p>
+
+          <p>Language barriers do not only affect people in developing nations. Immigrants, refugees, and minority communities in wealthy countries also face profound exclusion. A person who speaks limited English in the United Kingdom, or limited French in Canada, may struggle to access legal services, understand their rights, or communicate with healthcare providers — regardless of how intelligent or capable they are.</p>
+
+          <p>Illiteracy and language barriers compound other forms of inequality — making it harder for affected individuals to escape poverty, access justice, or participate in democratic processes. They create a cycle that is difficult to break without deliberate, sustained intervention.</p>
+
+          <!-- Image 2 -->
+          <img
+            class="content-img"
+            src="child_learning_literacy_barriers.jpeg"
+            alt="Children in a classroom learning, highlighting the need to address literacy barriers from an early age"
+          />
+
+          <div class="callout-card">
+            <h3>Key Facts About Literacy Inequality</h3>
+            <ul>
+              <li>773 million adults globally cannot read or write — two-thirds of them are women.</li>
+              <li>Around 250 million children are failing to acquire basic literacy skills even after years of schooling.</li>
+              <li>Minority language speakers are significantly more likely to drop out of school early.</li>
+              <li>Immigrants with limited host-country language skills earn up to 40% less than fluent speakers.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- SECTION 3: Impact on Education -->
+        <section class="content-section" id="education">
+          <div class="section-badge"><span>📚</span> Impact on Education</div>
+          <h2>How Language Barriers Widen the Education Gap</h2>
+          <div class="section-divider"></div>
+
+          <p>Education systems around the world often operate in a single dominant language — typically the language of the colonial power or the national majority. For children whose home language is different, school becomes a place of confusion and exclusion rather than learning and growth. Studies consistently show that children learn best in their mother tongue, especially in the early years of schooling.</p>
+
+          <p>When children are taught in a language they do not understand at home, they fall behind in foundational skills like reading comprehension and numeracy. Teachers who are not trained to support multilingual learners often lack the tools to bridge this gap. As a result, children from linguistic minority communities drop out at higher rates, have lower academic achievement, and face greater barriers to higher education and employment.</p>
+
+          <p>Literacy is also deeply tied to confidence. A child who struggles to read in a language that is not their own may begin to believe they are incapable of learning — carrying that damaging belief into adulthood. Addressing language barriers in education is not just about teaching vocabulary; it is about restoring dignity, confidence, and the right to learn.</p>
+
+          <!-- Image grid -->
+          <div class="img-grid">
+            <img
+              class="content-img"
+              src="books_in_multiple_languages.jpeg"
+              alt="A stack of books in multiple languages, representing multilingual education resources"
+            />
+            <img
+              class="content-img"
+              src="teacher_working_with_students.jpeg"
+              alt="A teacher working with young students in a classroom, supporting early literacy development"
+            />
+          </div>
+
+          <div class="callout-card">
+            <h3>Solutions for Education</h3>
+            <ul>
+              <li>Introduce mother-tongue-based multilingual education in early schooling years.</li>
+              <li>Train teachers in multilingual and culturally responsive teaching methods.</li>
+              <li>Develop and distribute learning materials in local and minority languages.</li>
+              <li>Create adult literacy programmes that respect learners' existing language skills.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- SECTION 4: Impact on Healthcare -->
+        <section class="content-section" id="healthcare">
+          <div class="section-badge"><span>🩺</span> Impact on Healthcare</div>
+          <h2>When Language Barriers Cost Lives: Inequality in Healthcare</h2>
+          <div class="section-divider"></div>
+
+          <p>Language barriers in healthcare are a matter of life and death. When a patient cannot communicate their symptoms clearly to a doctor, or when they cannot understand a diagnosis or medication instructions, the consequences can be fatal. Studies have shown that patients with limited proficiency in the dominant language receive lower quality care, experience more medical errors, and have worse health outcomes than fluent speakers.</p>
+
+          <p>Imagine being in pain and unable to explain where it hurts. Imagine receiving a cancer diagnosis in a language you barely understand, with no one to help you process what it means or what to do next. For millions of immigrants, refugees, and minority language speakers, this is not a hypothetical — it is a daily reality.</p>
+
+          <p>Low literacy also compounds healthcare inequality. Patients who cannot read written instructions, consent forms, or medication labels are at a significant disadvantage. Public health campaigns — about vaccines, disease prevention, mental health — often fail to reach the communities that need them most because the information is only available in the dominant language or at a reading level that excludes many adults.</p>
+
+          <img
+            class="content-img"
+            src="consulting_patient.jpeg"
+            alt="A healthcare worker consulting with a patient, illustrating the critical need for language support in medical settings"
+          />
+
+          <div class="callout-card">
+            <h3>Solutions for Healthcare</h3>
+            <ul>
+              <li>Provide professional medical interpreters and translation services in hospitals and clinics.</li>
+              <li>Develop multilingual health information materials and easy-read resources for low-literacy patients.</li>
+              <li>Train healthcare workers in cultural competency and communication with language-diverse patients.</li>
+              <li>Use visual aids, diagrams, and pictorial instructions alongside written medical guidance.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- SECTION 5: Solutions -->
+        <section class="content-section" id="solutions">
+          <div class="section-badge"><span>💡</span> Solutions</div>
+          <h2>Practical Solutions to Break Down Language &amp; Literacy Barriers</h2>
+          <div class="section-divider"></div>
+
+          <h3>Technology as a Bridge</h3>
+          <p>Technology offers powerful tools to reduce language and literacy barriers. Translation apps, voice-to-text tools, and AI-powered language learning platforms have made it easier than ever for people to communicate across language differences. Governments and organisations can leverage these technologies to make public services, legal information, and healthcare guidance available in multiple languages at low cost.</p>
+
+          <h3>Community-Based Literacy Programmes</h3>
+          <p>Community literacy programmes that meet people where they are — in their own languages, at their own pace, in familiar environments — have proven highly effective. When literacy education is combined with practical life skills such as reading a bus timetable, filling in a job application, or understanding a rental agreement, it becomes immediately relevant and motivating for learners.</p>
+
+          <h3>Policy and Legal Reform</h3>
+          <p>Governments must recognise language rights as human rights. This means legally protecting the right to access public services in one's own language, funding multilingual education systems, and requiring healthcare and legal services to provide interpretation. Countries that have adopted robust language policies — such as Canada's Official Languages Act or South Africa's recognition of 11 official languages — demonstrate that it is possible to value linguistic diversity while building a cohesive society.</p>
+
+          <h3>Raising Awareness and Changing Attitudes</h3>
+          <p>Social attitudes toward language diversity matter enormously. When speakers of minority languages are made to feel ashamed of their mother tongue, or when literacy struggles are treated as personal failures rather than systemic issues, the barriers only deepen. Education systems, media, and community leaders all have a role to play in fostering respect for linguistic diversity and creating environments where people feel safe asking for help.</p>
+        </section>
+
+        <!-- SECTION 6: Take Action -->
+        <section class="content-section" id="take-action">
+          <div class="section-badge"><span>⚡</span> Take Action</div>
+          <h2>What You Can Do — Starting Today</h2>
+          <div class="section-divider"></div>
+
+          <p>Language and literacy inequality can feel distant or abstract — until you look at the person sitting next to you. As students, citizens, and future professionals, we all have the power to take meaningful action.</p>
+
+          <div class="callout-card">
+            <h3>Actions for Students &amp; Citizens</h3>
+            <ul>
+              <li>Volunteer as a literacy tutor or language conversation partner for immigrants and refugees in your community.</li>
+              <li>Advocate for multilingual signage, information, and services in your school, workplace, or local area.</li>
+              <li>Support organisations that provide free literacy education and language classes.</li>
+              <li>Challenge language-based discrimination when you see it — defending someone's right to speak their language is an act of equality.</li>
+              <li>As a future professional, commit to making your communications clear, accessible, and inclusive regardless of your field.</li>
+              <li>Share information about language rights and literacy programmes on social media to raise awareness.</li>
+            </ul>
+          </div>
+
+          <p>Reducing language and literacy inequality does not require extraordinary resources — it requires empathy, awareness, and the willingness to make small but meaningful changes in how we communicate, design services, and treat one another.</p>
+        </section>
+
+        <!-- SECTION 7: Conclusion -->
+        <section class="content-section" id="conclusion">
+          <div class="conclusion-block">
+            <h2>Language is a <span>Right</span>, Not a Privilege</h2>
+            <p>Language and literacy are not just communication tools — they are the keys to participation in society. When people are excluded because of the language they speak or their inability to read, we lose their ideas, their contributions, and their potential. SDG 10 calls on us to build a world where no one is left behind because of the words they use or the letters they cannot read.</p>
+            <p>Progress is possible. From multilingual classrooms to medical interpreters, from community literacy programmes to language-rights legislation — the solutions exist. What is needed is the collective will to implement them.</p>
+            <p class="final-quote">"A language is not just words. It is a culture, a tradition, a unity of a community — a whole history that creates what a community is. It is all embodied in language." — Noam Chomsky</p>
+          </div>
+        </section>
+
+      </div><!-- end .content-area -->
+    </div><!-- end .page-layout -->
+  </main>
+
+  <!-- Go to Top — CSS only, position fixed -->
+  <a href="#top" class="go-top" aria-label="Go back to top of page">↑ Top</a>
+
+  <!-- ══════════════════════════════════════
+       FOOTER — Shared Template
+  ══════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="home.html" class="nav-logo">Equal<span>World</span></a>
+        <p>A student-led project dedicated to raising awareness about SDG 10 — Reducing Inequalities — and inspiring action at every level.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="ais.html">Action Simulator</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Student 3</h4>
+        <ul>
+          <li><a href="pageEditor_ST3.html" target="_blank">Page Editor</a></li>
+          <li><a href="validation_ST3.html" target="_blank">Validation</a></li>
+          <li><a href="#" target="_blank">Accessibility Report</a></li>
+        </ul>
+        <p style="font-size:0.8rem; margin-top:0.75rem; opacity:0.55;">Senuth Hansira Karunaratne<br/>Student 3 — Feedback &amp; Team Page</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 EqualWorld — SDG 10 Group Coursework | University of Westminster</span>
+      <span>Built with purpose. Designed for change.</span>
+    </div>
+  </footer>
+
+  <!-- JavaScript — mobile nav toggle -->
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+  </script>
+
+</body>
+</html>
