@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================================
+       FEEDBACK & PROGRAM DIRECTORY PAGE — SDG 10: Reducing Inequalities
+       File: feedback.html
+       Author: [Your Name] — Student 3
+       Description: Scrollable programme directory, ratings/reviews
+       section, and JavaScript-enhanced feedback form.
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback & Programs —  EqualWorld | SDG 10</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+
+  <!-- ============================================================
+       GLOBAL CSS (style.css in full project)
+  ============================================================ -->
+  <style>
+    /* ── CSS VARIABLES ── */
+    :root {
+      --bg:         #f5f0e8;
+      --ink:        #1a1a2e;
+      --accent:     #c0392b;
+      --accent2:    #e67e22;
+      --card:       #fffdf7;
+      --nav-bg:     #1a1a2e;
+      --nav-text:   #f5f0e8;
+      --footer-bg:  #1a1a2e;
+      --muted:      #7a7a8c;
+      --border:     #d4c9b0;
+      --font-display: 'Playfair Display', serif;
+      --font-body:    'Source Serif 4', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ── GLOBAL HEADER ── */
+    header {
+      background: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--nav-text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent2); }
+    .nav-links { display: flex; list-style: none; gap: 1.6rem; }
+    .nav-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      transition: opacity 0.2s, color 0.2s;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--accent2); border-bottom-color: var(--accent2); }
+    .nav-links a.active { opacity: 1; color: var(--accent2); border-bottom-color: var(--accent2); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--nav-text); }
+
+    /* ── GLOBAL FOOTER ── */
+    footer {
+      background: var(--footer-bg);
+      color: var(--nav-text);
+      padding: 2.5rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2rem; padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand p { font-size: 0.87rem; opacity: 0.6; line-height: 1.7; margin-top: 0.5rem; }
+    .footer-col h4 { font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.8rem; color: var(--accent2); letter-spacing: 0.05em; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .footer-col ul li a { color: rgba(245,240,232,0.65); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--accent2); }
+    .footer-bottom { max-width: 1200px; margin: 1.5rem auto 0; display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.5; }
+
+    /* ── GLOBAL CARD ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.1); transform: translateY(-3px); }
+  </style>
+
+  <!-- ============================================================
+       PAGE-SPECIFIC EMBEDDED CSS
+       Styles specific to feedback.html only
+  ============================================================ -->
+  <style>
+    /* 1. Page hero banner */
+    .page-hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
+      color: #f5f0e8;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .page-hero .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--accent2); }
+    .page-hero p { font-size: 1rem; opacity: 0.8; max-width: 520px; margin: 0 auto; }
+
+    /* 2. Main wrapper */
+    .main-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 5rem;
+    }
+
+    /* 3. Section title style */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .title-line {
+      width: 55px; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* 4. Scrollable programme cards section */
+    .programmes-section { margin-bottom: 4rem; }
+
+    .programmes-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* 5. Styled dropdown */
+    .sort-dropdown {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--card);
+      color: var(--ink);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .sort-dropdown:focus { outline: none; border-color: var(--accent); }
+
+    /* 6. Scrollable container */
+    .programmes-scroll {
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--border);
+    }
+    .programmes-scroll::-webkit-scrollbar { width: 5px; }
+    .programmes-scroll::-webkit-scrollbar-track { background: var(--border); border-radius: 3px; }
+    .programmes-scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* 7. Programme cards grid */
+    .programmes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .programme-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .programme-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.12); transform: translateY(-4px); }
+
+    .programme-card-img {
+      width: 100%; height: 140px;
+      object-fit: cover;
+      display: block;
+    }
+    .programme-card-body { padding: 1rem; }
+    .programme-card-body h3 {
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 600;
+      margin-bottom: 0.4rem; color: var(--ink);
+    }
+    .programme-card-body p {
+      font-size: 0.87rem; color: #4a4a5a;
+      line-height: 1.65; margin-bottom: 0.85rem;
+    }
+
+    /* 8. Card button with hover effect */
+    .btn-card {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--nav-text);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.45rem 1rem;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-card:hover { background: var(--accent); transform: translateY(-1px); }
+
+    /* 9. Ratings section */
+    .ratings-section { margin-bottom: 4rem; }
+
+    .rating-summary {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: var(--ink);
+      color: var(--nav-text);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .rating-big {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--accent2);
+      line-height: 1;
+    }
+    .rating-label { font-size: 1.1rem; font-weight: 600; color: var(--nav-text); }
+    .rating-count { font-size: 0.85rem; opacity: 0.6; margin-top: 0.2rem; }
+    .rating-stars { font-size: 1.5rem; color: var(--accent2); letter-spacing: 0.1em; }
+
+    /* 10. Review cards */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+    }
+    .review-card h4 {
+      font-family: var(--font-display);
+      font-size: 0.95rem; font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .review-card p { font-size: 0.87rem; color: #4a4a5a; line-height: 1.65; margin-bottom: 0.6rem; }
+    .review-card .see-more { font-size: 0.82rem; color: var(--accent); text-decoration: none; font-weight: 600; }
+    .review-card .see-more:hover { text-decoration: underline; }
+    .review-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; font-size: 0.8rem; opacity: 0.65; }
+    .review-score { background: var(--accent2); color: #fff; font-weight: 700; font-size: 0.8rem; padding: 0.2rem 0.5rem; border-radius: 3px; }
+
+    /* 11. Feedback form section */
+    .feedback-section { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; }
+
+    .form-group { margin-bottom: 1.25rem; }
+
+    label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+      color: var(--ink);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="datetime-local"],
+    textarea,
+    select {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 0.93rem;
+      padding: 0.65rem 0.9rem;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--ink);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      line-height: 1.5;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
+    }
+
+    /* 12. Error state for inputs */
+    input.error, textarea.error, select.error {
+      border-color: var(--accent);
+      background: #fff5f5;
+    }
+
+    .error-msg {
+      display: none;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 0.3rem;
+      font-weight: 600;
+    }
+    .error-msg.show { display: block; }
+
+    /* 13. Character counter */
+    .char-counter {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: right;
+      margin-top: 0.3rem;
+      transition: color 0.2s;
+    }
+    .char-counter.warning { color: var(--accent2); }
+    .char-counter.limit   { color: var(--accent); font-weight: 600; }
+
+    /* 14. Fieldset styling */
+    fieldset {
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    legend {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      padding: 0 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* 15. Two-column form grid */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    /* 16. Submit button */
+    .btn-submit {
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 0.85rem 2.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(192,57,43,0.3);
+    }
+    .btn-submit:hover { background: #a93226; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(192,57,43,0.4); }
+
+    /* 17. Confirmation message */
+    .confirmation-msg {
+      display: none;
+      background: #eafaf1;
+      border: 1.5px solid #27ae60;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      color: #1e8449;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 1.5rem;
+      animation: fadeUp 0.4s ease;
+    }
+    .confirmation-msg.show { display: block; }
+
+    /* Go to top button */
+    .go-top {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--accent); color: #fff;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.65rem 1rem; border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(192,57,43,0.35);
+      transition: background 0.2s, transform 0.2s; z-index: 200;
+    }
+    .go-top:hover { background: #a93226; transform: translateY(-2px); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--nav-bg); padding: 1rem 2rem 1.5rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .rating-summary { flex-direction: column; text-align: center; gap: 1rem; }
+      .main-wrapper { padding: 2.5rem 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       HEADER — Shared Template
+  ══════════════════════════════════════ -->
+  <header>
+    <nav>
+      <a href="home.html" class="nav-logo">Equal<span>World</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="ais.html">Action Simulator</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="feedback.html" class="active" aria-current="page">Feedback</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="sitemap.html">Sitemap</a></li>
+        <li><a href="content_ST3.html">Our SDG</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       HERO BANNER
+  ══════════════════════════════════════ -->
+  <div class="page-hero" id="top">
+    <div class="badge">SDG 10 — Team Align - Programmes &amp; Feedback</div>
+    <h1>Get Involved &amp; <em>Share Your Voice</em></h1>
+    <p>Explore initiatives tackling inequality and submit your feedback to help us grow.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       MAIN
+  ══════════════════════════════════════ -->
+  <main class="main-wrapper">
+
+    <!-- ══ SECTION 1: SCROLLABLE PROGRAMME DIRECTORY ══ -->
+    <section class="programmes-section" aria-labelledby="prog-title">
+      <h2 class="section-title" id="prog-title">Programmes &amp; Opportunities</h2>
+      <p class="section-subtitle">Explore initiatives related to SDG 10 — Reducing Inequalities</p>
+      <div class="title-line"></div>
+
+      <!-- Controls: sort dropdown -->
+      <div class="programmes-controls">
+        <p style="font-size:0.9rem; color:var(--muted);">Showing 4 opportunities</p>
+        <!-- Styled dropdown for sorting — visual only as per spec -->
+        <select class="sort-dropdown" aria-label="Sort programmes">
+          <option>Most Popular</option>
+          <option>Student-Friendly</option>
+          <option>Newest First</option>
+          <option>Nearest to Me</option>
+        </select>
+      </div>
+
+      <!-- Scrollable container -->
+      <div class="programmes-scroll" role="region" aria-label="Scrollable list of programmes">
+        <div class="programmes-grid">
+
+          <!-- Card 1 -->
+          <article class="programme-card">
+            <img
+              class="programme-card-img"
+              src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=70"
+              alt="Students participating in a digital literacy workshop to bridge the digital divide"
+            />
+            <div class="programme-card-body">
+              <h3>Digital Literacy Workshops</h3>
+              <p>Free workshops teaching essential digital skills to underserved communities — from basic internet usage to job applications online.</p>
+              <button class="btn-card" onclick="alert('Thank you for your interest in Digital Literacy Workshops!')">Get Involved</button>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="programme-card">
+            <img
+              class="programme-card-img"
+              src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&q=70"
+              alt="A volunteer handing books to children in a community library programme"
+            />
+            <div class="programme-card-body">
+              <h3>Community Book Drive</h3>
+              <p>Donate or collect used textbooks and learning materials for students in under-resourced schools across the region.</p>
+              <button class="btn-card" onclick="alert('Thank you for your interest in the Community Book Drive!')">Learn More</button>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="programme-card">
+            <img
+              class="programme-card-img"
+              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=70"
+              alt="A doctor using telemedicine to consult with a patient in a rural area"
+            />
+            <div class="programme-card-body">
+              <h3>Telemedicine Access Campaign</h3>
+              <p>Support our campaign pushing for free telemedicine access for rural communities — connecting patients with doctors remotely.</p>
+              <button class="btn-card" onclick="alert('Thank you for your interest in the Telemedicine Access Campaign!')">Join Campaign</button>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="programme-card">
+            <img
+              class="programme-card-img"
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=70"
+              alt="Community volunteers building affordable housing for low-income families"
+            />
+            <div class="programme-card-body">
+              <h3>Affordable Housing Initiative</h3>
+              <p>Volunteer with local builders to construct safe, affordable homes using sustainable low-cost materials for families in need.</p>
+              <button class="btn-card" onclick="alert('Thank you for your interest in the Affordable Housing Initiative!')">Volunteer</button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SECTION 2: RATINGS & REVIEWS ══ -->
+    <section class="ratings-section" aria-labelledby="reviews-title">
+      <h2 class="section-title" id="reviews-title">What People Are Saying</h2>
+      <p class="section-subtitle">Ratings and reviews from our community members</p>
+      <div class="title-line"></div>
+
+      <!-- Overall rating summary -->
+      <div class="rating-summary" role="region" aria-label="Overall rating summary">
+        <div>
+          <div class="rating-big">8.7<span style="font-size:1.5rem;">/10</span></div>
+          <div class="rating-label">Excellent</div>
+          <div class="rating-count">Based on 214 community reviews</div>
+        </div>
+        <div>
+          <div class="rating-stars">★★★★★</div>
+          <p style="font-size:0.88rem; opacity:0.75; margin-top:0.5rem;">94% of participants would recommend our programmes to others.</p>
+        </div>
+      </div>
+
+      <!-- Individual review cards -->
+      <div class="reviews-grid">
+
+        <!-- Review 1 -->
+        <div class="review-card">
+          <h4>Life-Changing Digital Skills Programme</h4>
+          <p>The digital literacy workshop completely changed my perspective. I was able to apply for jobs online for the first time and landed an interview within weeks...</p>
+          <a href="#" class="see-more">See more</a>
+          <div class="review-meta">
+            <span>Amara S. — March 2026</span>
+            <span class="review-score">9/10</span>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <h4>Book Drive Made a Real Difference</h4>
+          <p>Our school received over 200 textbooks through the Community Book Drive. Students who couldn't afford materials now have everything they need to succeed...</p>
+          <a href="#" class="see-more">See more</a>
+          <div class="review-meta">
+            <span>Mr. J. Perera — February 2026</span>
+            <span class="review-score">10/10</span>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <h4>Telemedicine Reached My Village</h4>
+          <p>I live in a remote area with no nearby hospital. Through the telemedicine programme, I was able to consult a specialist doctor without travelling hours away...</p>
+          <a href="#" class="see-more">See more</a>
+          <div class="review-meta">
+            <span>Fatima K. — January 2026</span>
+            <span class="review-score">8/10</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ SECTION 3: FEEDBACK FORM ══ -->
+    <section class="feedback-section" aria-labelledby="form-title">
+      <h2 class="section-title" id="form-title">Share Your Feedback</h2>
+      <p class="section-subtitle">We'd love to hear your thoughts — help us improve our programmes.</p>
+      <div class="title-line"></div>
+
+      <form id="feedbackForm" novalidate>
+
+        <!-- FIELDSET 1: Personal Details -->
+        <fieldset>
+          <legend>Personal Details</legend>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName">Full Name *</label>
+              <input type="text" id="fullName" placeholder="e.g. Jane Smith" />
+              <span class="error-msg" id="err-fullName">Please enter your full name.</span>
+            </div>
+            <div class="form-group">
+              <label for="emailAddr">Email Address *</label>
+              <input type="email" id="emailAddr" placeholder="e.g. jane@email.com" />
+              <span class="error-msg" id="err-email">Please enter a valid email address.</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telNum">Telephone Number</label>
+              <input type="tel" id="telNum" placeholder="e.g. +44 7000 000000" />
+            </div>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <!-- Datalist for searchable suggestions -->
+              <input type="text" id="country" list="countryList" placeholder="Start typing your country..." />
+              <datalist id="countryList">
+                <option value="United Kingdom"></option>
+                <option value="Sri Lanka"></option>
+                <option value="United States"></option>
+                <option value="India"></option>
+                <option value="Nigeria"></option>
+                <option value="Brazil"></option>
+                <option value="Kenya"></option>
+                <option value="Australia"></option>
+                <option value="Germany"></option>
+                <option value="France"></option>
+              </datalist>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" rows="2" placeholder="Your address (optional)"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- FIELDSET 2: Feedback Details -->
+        <fieldset>
+          <legend>Feedback Details</legend>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="programme">Programme *</label>
+              <select id="programme">
+                <option value="">— Select a programme —</option>
+                <option value="digital">Digital Literacy Workshops</option>
+                <option value="books">Community Book Drive</option>
+                <option value="tele">Telemedicine Access Campaign</option>
+                <option value="housing">Affordable Housing Initiative</option>
+              </select>
+              <span class="error-msg" id="err-programme">Please select a programme.</span>
+            </div>
+            <div class="form-group">
+              <label for="rating">Your Rating *</label>
+              <select id="rating">
+                <option value="">— Select a rating —</option>
+                <option value="10">10 — Outstanding</option>
+                <option value="9">9 — Excellent</option>
+                <option value="8">8 — Very Good</option>
+                <option value="7">7 — Good</option>
+                <option value="6">6 — Fair</option>
+                <option value="5">5 — Average</option>
+                <option value="1">Below 5 — Poor</option>
+              </select>
+              <span class="error-msg" id="err-rating">Please select a rating.</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="visitDate">Visit / Participation Date</label>
+              <input type="date" id="visitDate" />
+            </div>
+            <div class="form-group">
+              <label for="visitTime">Date &amp; Time of Submission</label>
+              <input type="datetime-local" id="visitTime" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Feedback / Comments *</label>
+            <textarea
+              id="message"
+              rows="5"
+              maxlength="500"
+              placeholder="Tell us about your experience — what worked well, what could be improved..."
+            ></textarea>
+            <!-- Live character counter — updated by JavaScript -->
+            <div class="char-counter" id="charCounter">500 characters remaining</div>
+            <span class="error-msg" id="err-message">Please enter your feedback (minimum 20 characters).</span>
+          </div>
+        </fieldset>
+
+        <!-- Submit button -->
+        <button type="button" class="btn-submit" id="submitBtn" onclick="submitForm()">
+          Submit Feedback
+        </button>
+
+      </form>
+
+      <!-- Confirmation message shown on successful submission -->
+      <div class="confirmation-msg" id="confirmMsg" role="alert">
+        ✅ Thank you for your feedback! Your response has been recorded. We appreciate you helping us improve.
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Go to Top button — CSS only -->
+  <a href="#top" class="go-top" aria-label="Go back to top of page">↑ Top</a>
+
+  <!-- ══════════════════════════════════════
+       FOOTER — Shared Template
+  ══════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="home.html" class="nav-logo">Equal<span>World</span></a>
+        <p>A student-led project dedicated to raising awareness about SDG 10 — Reducing Inequalities — and inspiring action at every level.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="ais.html">Action Simulator</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Student 3</h4>
+        <ul>
+          <li><a href="pageEditor_ST3.html" target="_blank">Page Editor</a></li>
+          <li><a href="validation_ST3.html" target="_blank">Validation</a></li>
+          <li><a href="#" target="_blank">Accessibility Report</a></li>
+        </ul>
+        <p style="font-size:0.8rem; margin-top:0.75rem; opacity:0.55;">[Your Name] — Student 3<br/>Feedback &amp; Team Page</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 EqualWorld — SDG 10 Group Coursework | University of Westminster</span>
+      <span>Built with purpose. Designed for change.</span>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════
+       JAVASCRIPT
+  ══════════════════════════════════════ -->
+  <script>
+
+    // ── Mobile nav toggle ──
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+
+    // ── Live character counter ──
+    // Updates remaining characters as the user types in the message field
+    const messageField  = document.getElementById('message');
+    const charCounter   = document.getElementById('charCounter');
+    const maxChars      = 500;
+
+    messageField.addEventListener('input', function () {
+      const remaining = maxChars - this.value.length;
+      charCounter.textContent = remaining + ' characters remaining';
+
+      // Change colour based on how close to limit
+      charCounter.classList.remove('warning', 'limit');
+      if (remaining <= 50 && remaining > 10) {
+        charCounter.classList.add('warning');
+      } else if (remaining <= 10) {
+        charCounter.classList.add('limit');
+      }
+    });
+
+    // ── Helper: show or clear field error ──
+    function setError(fieldId, errorId, show) {
+      const field = document.getElementById(fieldId);
+      const err   = document.getElementById(errorId);
+      if (show) {
+        field.classList.add('error');
+        err.classList.add('show');
+      } else {
+        field.classList.remove('error');
+        err.classList.remove('show');
+      }
+    }
+
+    // ── Form validation & submission ──
+    function submitForm() {
+      const fullName  = document.getElementById('fullName').value.trim();
+      const email     = document.getElementById('emailAddr').value.trim();
+      const programme = document.getElementById('programme').value;
+      const rating    = document.getElementById('rating').value;
+      const message   = document.getElementById('message').value.trim();
+
+      let valid = true;
+
+      // Validate full name
+      if (fullName === '') {
+        setError('fullName', 'err-fullName', true);
+        valid = false;
+      } else {
+        setError('fullName', 'err-fullName', false);
+      }
+
+      // Validate email — simple regex check
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        setError('emailAddr', 'err-email', true);
+        valid = false;
+      } else {
+        setError('emailAddr', 'err-email', false);
+      }
+
+      // Validate programme selection
+      if (programme === '') {
+        setError('programme', 'err-programme', true);
+        valid = false;
+      } else {
+        setError('programme', 'err-programme', false);
+      }
+
+      // Validate rating selection
+      if (rating === '') {
+        setError('rating', 'err-rating', true);
+        valid = false;
+      } else {
+        setError('rating', 'err-rating', false);
+      }
+
+      // Validate message — must be at least 20 characters
+      if (message.length < 20) {
+        setError('message', 'err-message', true);
+        valid = false;
+      } else {
+        setError('message', 'err-message', false);
+      }
+
+      // If all valid — show confirmation and reset form
+      if (valid) {
+        document.getElementById('confirmMsg').classList.add('show');
+        document.getElementById('feedbackForm').reset();
+        charCounter.textContent = '500 characters remaining';
+        charCounter.classList.remove('warning', 'limit');
+
+        // Scroll to confirmation message
+        document.getElementById('confirmMsg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    // ── Clear errors on input (real-time feedback) ──
+    document.getElementById('fullName').addEventListener('input', function () {
+      if (this.value.trim() !== '') setError('fullName', 'err-fullName', false);
+    });
+    document.getElementById('emailAddr').addEventListener('input', function () {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailRegex.test(this.value.trim())) setError('emailAddr', 'err-email', false);
+    });
+    document.getElementById('programme').addEventListener('change', function () {
+      if (this.value !== '') setError('programme', 'err-programme', false);
+    });
+    document.getElementById('rating').addEventListener('change', function () {
+      if (this.value !== '') setError('rating', 'err-rating', false);
+    });
+    document.getElementById('message').addEventListener('input', function () {
+      if (this.value.trim().length >= 20) setError('message', 'err-message', false);
+    });
+
+  </script>
+
+</body>
+</html>
