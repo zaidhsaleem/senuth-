@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================================
+       TEAM PAGE — SDG 10: Reducing Inequalities
+       File: team.html
+       Author: Senuth Hansira Karunaratne — Student 3
+       Description: Team page with interactive hover thumbnails
+       and expandable member details using CSS transitions.
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Team — EqualWorld | SDG 10</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+
+  <!-- ============================================================
+       GLOBAL CSS (style.css in full project)
+  ============================================================ -->
+  <style>
+    :root {
+      --bg:           #f5f0e8;
+      --ink:          #1a1a2e;
+      --accent:       #c0392b;
+      --accent2:      #e67e22;
+      --card:         #fffdf7;
+      --nav-bg:       #1a1a2e;
+      --nav-text:     #f5f0e8;
+      --footer-bg:    #1a1a2e;
+      --muted:        #7a7a8c;
+      --border:       #d4c9b0;
+      --font-display: 'Playfair Display', serif;
+      --font-body:    'Source Serif 4', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ── GLOBAL HEADER ── */
+    header {
+      background: var(--nav-bg);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    nav {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem; height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800; font-size: 1.3rem;
+      color: var(--nav-text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent2); }
+    .nav-links { display: flex; list-style: none; gap: 1.6rem; }
+    .nav-links a {
+      color: var(--nav-text); text-decoration: none;
+      font-size: 0.82rem; font-weight: 400;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      opacity: 0.75; transition: opacity 0.2s, color 0.2s;
+      padding-bottom: 3px; border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--accent2); border-bottom-color: var(--accent2); }
+    .nav-links a.active { opacity: 1; color: var(--accent2); border-bottom-color: var(--accent2); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--nav-text); }
+
+    /* ── GLOBAL FOOTER ── */
+    footer { background: var(--footer-bg); color: var(--nav-text); padding: 2.5rem 2rem; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2rem; padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand p { font-size: 0.87rem; opacity: 0.6; line-height: 1.7; margin-top: 0.5rem; }
+    .footer-col h4 { font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.8rem; color: var(--accent2); letter-spacing: 0.05em; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .footer-col ul li a { color: rgba(245,240,232,0.65); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--accent2); }
+    .footer-bottom { max-width: 1200px; margin: 1.5rem auto 0; display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.5; }
+  </style>
+
+  <!-- ============================================================
+       PAGE-SPECIFIC EMBEDDED CSS
+       Styles specific to team.html only — does not override global CSS
+  ============================================================ -->
+  <style>
+
+    /* 1. Page hero */
+    .page-hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
+      color: #f5f0e8;
+      padding: 4.5rem 2rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .page-hero .badge {
+      display: inline-block;
+      background: var(--accent); color: #fff;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.3rem 0.9rem; border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      line-height: 1.2; margin-bottom: 0.75rem;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--accent2); }
+    .page-hero p { font-size: 1rem; opacity: 0.8; max-width: 500px; margin: 0 auto; }
+
+    /* 2. Main wrapper */
+    .main-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem 5rem;
+    }
+
+    /* 3. Section title */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 600;
+      color: var(--ink); margin-bottom: 0.4rem;
+      text-align: center;
+    }
+    .section-sub {
+      text-align: center; font-size: 0.95rem;
+      color: var(--muted); margin-bottom: 0.75rem;
+    }
+    .title-line {
+      width: 55px; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px; margin: 0 auto 3rem;
+    }
+
+    /* 4. Team grid layout — 4 cards in a row */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    /* 5. Individual team member block
+          — keyboard accessible via tabindex */
+    .member-block {
+      position: relative;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* 6. Thumbnail container */
+    .member-thumb {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px 8px 0 0; /* ← only round TOP corners */
+      border: 2px solid var(--border);
+      border-bottom:none;  /* ← remove bottom border */
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    /* 7. Hover & focus effect on thumbnail */
+    .member-block:hover .member-thumb,
+    .member-block:focus .member-thumb {
+      border-color: var(--accent);
+      box-shadow: 0 10px 35px rgba(192,57,43,0.25);
+    }
+
+    /* 8. Thumbnail image */
+    .member-thumb img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+
+    /* 9. Image scale + slight dim on hover */
+    .member-block:hover .member-thumb img,
+    .member-block:focus .member-thumb img {
+      transform: scale(1.05);
+      opacity: 0.88;
+    }
+
+    /* 10. Overlay panel — hidden by default, revealed on hover/focus */
+    .member-overlay {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  padding: 0 1.2rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, padding 0.3s ease;
+  color: var(--ink);   /* ← dark text since background is light now */
+}
+
+    /* 11. Expand overlay on hover / focus */
+    .member-block:hover .member-overlay,
+    .member-block:focus .member-overlay {
+      max-height:400px;
+      padding: 1.2rem;
+    }
+
+    /* 12. Name always visible at bottom of card */
+    .member-name-bar {
+      background: var(--ink);
+      color: var(--nav-text);
+      padding: 0.75rem 1rem;
+      border-radius: 0 0 6px 6px;   /* ← only round BOTTOM corners */
+      border: 2px solid var(--border);
+      border-top:none;    /* ← remove top border */
+      text-align: center;
+    }
+    .member-name-bar h3 {
+      font-family: var(--font-display);
+      font-size: 0.95rem; font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+    .member-name-bar .role-label {
+      font-size: 0.75rem;
+      color: var(--accent2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* 13. Overlay content details */
+    .overlay-role {
+      font-size: 0.78rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .overlay-name {
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 1.05rem; font-weight: 600;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .overlay-pages {
+      font-size: 0.82rem;
+      opacity: 0.85;
+      margin-bottom: 0.6rem;
+      line-height: 1.6;
+    }
+    .overlay-pages span {
+      display: inline-block;
+      background: rgba(230,126,34,0.25);
+      color: var(--accent2);
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      margin: 0.15rem 0.15rem 0.15rem 0;
+    }
+    .overlay-summary {
+       color: #4a4a5a;
+      font-size: 0.82rem;
+      opacity: 0.8;
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    /* 14. Student number badge */
+    .student-badge {
+      position: absolute;
+      top: 0.75rem; left: 0.75rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 0.75rem; font-weight: 700;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* 15. Hover instruction hint */
+    .hover-hint {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+    .hover-hint span {
+      display: inline-block;
+      background: var(--border);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+    }
+
+    /* Go to top */
+    .go-top {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--accent); color: #fff;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.65rem 1rem; border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(192,57,43,0.35);
+      transition: background 0.2s, transform 0.2s; z-index: 200;
+    }
+    .go-top:hover { background: #a93226; transform: translateY(-2px); }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .member-block { animation: fadeUp 0.5s ease both; }
+    .member-block:nth-child(1) { animation-delay: 0.1s; }
+    .member-block:nth-child(2) { animation-delay: 0.2s; }
+    .member-block:nth-child(3) { animation-delay: 0.3s; }
+    .member-block:nth-child(4) { animation-delay: 0.4s; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--nav-bg); padding: 1rem 2rem 1.5rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       HEADER — Shared Template
+  ══════════════════════════════════════ -->
+  <header>
+    <nav>
+      <a href="home.html" class="nav-logo">Equal<span>World</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="ais.html">Action Simulator</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="team.html" class="active" aria-current="page">Team</a></li>
+        <li><a href="sitemap.html">Sitemap</a></li>
+        <li><a href="content_ST3.html">Our SDG</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       HERO BANNER
+  ══════════════════════════════════════ -->
+  <div class="page-hero" id="top">
+    <div class="badge">SDG 10 — Team  Align  -  Meet the Team</div>
+    <h1>The People <em>Behind EqualWorld</em></h1>
+    <p>Four students united by one mission — to raise awareness about inequality and inspire real action.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       MAIN
+  ══════════════════════════════════════ -->
+  <main class="main-wrapper">
+
+    <h2 class="section-title">Our Team</h2>
+    <p class="section-sub">Hover over each member to learn about their role and contribution</p>
+    <div class="title-line"></div>
+
+    <!-- Hover hint -->
+    <p class="hover-hint"><span>💡 Hover over the images for details!</span></p>
+
+    <!-- ══ TEAM GRID ══ -->
+    <div class="team-grid">
+
+      <!-- ── STUDENT 1: Ruhansa ── -->
+      <div class="member-block" tabindex="0" role="button" aria-label="View details for Ruhansa Fonseka">
+        <div class="member-thumb">
+          <!-- Student badge -->
+          <div class="student-badge" aria-hidden="true">1</div>
+
+          <!-- Placeholder human photo — replace with real photo -->
+          <img
+            src="ruhansa.jpeg"
+            alt="Portrait photo of Kaluthara Wedage Ruhansa Piyumdie Fonseka, Student 1"
+          />
+
+          <!-- Expandable overlay — revealed on hover/focus -->
+          <div class="member-overlay" aria-hidden="true">
+            <div class="overlay-role">Student 1</div>
+            <div class="overlay-name">Ruhansa Piyumdie Fonseka</div>
+            <div class="overlay-pages">
+              <span>Template &amp; Nav</span>
+              <span>Home Page</span>
+              <span>Gallery</span>
+              <span>Content Page</span>
+              <span>Page Editor</span>
+              <span>Validation</span>
+            </div>
+            <div class="overlay-summary">
+              Ruhansa led the foundation of the entire website — designing and implementing the shared HTML template, global CSS, and navigation bar used by all team members. She also built the Home Page and Gallery.
+            </div>
+          </div>
+        </div>
+
+        <!-- Name always visible -->
+        <div class="member-name-bar">
+          <h3>Ruhansa Fonseka</h3>
+          <div class="role-label">Template · Home · Gallery</div>
+        </div>
+      </div>
+
+      <!-- ── STUDENT 2: Zaidh ── -->
+      <div class="member-block" tabindex="0" role="button" aria-label="View details for Zaidh Muhammath">
+        <div class="member-thumb">
+          <div class="student-badge" aria-hidden="true">2</div>
+
+          <img
+            src="zaidh.jpeg"
+            alt="Portrait photo of Zaidh Muhammath, Student 2"
+          />
+
+          <div class="member-overlay" aria-hidden="true">
+            <div class="overlay-role">Student 2</div>
+            <div class="overlay-name">Zaidh Muhammath</div>
+            <div class="overlay-pages">
+              <span>Splash Screen</span>
+              <span>Quiz / AIS</span>
+              <span>Content Page</span>
+              <span>Page Editor</span>
+              <span>Validation</span>
+            </div>
+            <div class="overlay-summary">
+              Zaidh created the Splash Screen that welcomes visitors to the site, complete with a countdown timer and CSS loader animation. He also built the Action Impact Simulator — an interactive tool that lets users explore their impact on SDG 10.
+            </div>
+          </div>
+        </div>
+
+        <div class="member-name-bar">
+          <h3>Zaidh Muhammath</h3>
+          <div class="role-label">Splash Screen · Quiz / AIS</div>
+        </div>
+      </div>
+
+      <!-- ── STUDENT 3: Senuth ── -->
+      <div class="member-block" tabindex="0" role="button" aria-label="View details for Senuth Karunaratne">
+        <div class="member-thumb">
+          <div class="student-badge" aria-hidden="true">3</div>
+
+          <img
+            src="senuth.jpeg"
+            alt="Portrait photo of Senuth Hansira Karunaratne, Student 3"
+          />
+
+          <div class="member-overlay" aria-hidden="true">
+            <div class="overlay-role">Student 3</div>
+            <div class="overlay-name">Senuth Hansira Karunaratne</div>
+            <div class="overlay-pages">
+              <span>Feedback Page</span>
+              <span>Team Page</span>
+              <span>Content Page</span>
+              <span>Page Editor</span>
+              <span>Validation</span>
+            </div>
+            <div class="overlay-summary">
+              Senuth developed the Feedback &amp; Programme Directory page — featuring a scrollable initiative showcase, ratings and reviews section, and a fully JavaScript-validated feedback form. He also built this Team Page.
+            </div>
+          </div>
+        </div>
+
+        <div class="member-name-bar">
+          <h3>Senuth Karunaratne</h3>
+          <div class="role-label">Feedback · Team Page</div>
+        </div>
+      </div>
+
+      <!-- ── STUDENT 4: Thenuri ── -->
+      <div class="member-block" tabindex="0" role="button" aria-label="View details for Thenuri Wadigasinghe">
+        <div class="member-thumb">
+          <div class="student-badge" aria-hidden="true">4</div>
+
+          <img
+            src="olu.jpeg"
+            alt="Portrait photo of Thenuri Thivithra Olu Wadigasinghe, Student 4"
+          />
+
+          <div class="member-overlay" aria-hidden="true">
+            <div class="overlay-role">Student 4</div>
+            <div class="overlay-name">Thenuri Thivithra Wadigasinghe</div>
+            <div class="overlay-pages">
+              <span>User Profile</span>
+              <span>Sitemap</span>
+              <span>Content Page</span>
+              <span>Page Editor</span>
+              <span>Validation</span>
+            </div>
+            <div class="overlay-summary">
+              Thenuri built the User Profile page — a step-by-step JavaScript-driven profile builder with progressive DOM updates and a completion progress indicator. She also created the interactive SVG Sitemap visualising the full website structure.
+            </div>
+          </div>
+        </div>
+
+        <div class="member-name-bar">
+          <h3>Thenuri Wadigasinghe</h3>
+          <div class="role-label">User Profile · Sitemap</div>
+        </div>
+      </div>
+
+    </div><!-- end .team-grid -->
+
+  </main>
+
+  <!-- Go to Top -->
+  <a href="#top" class="go-top" aria-label="Go back to top of page">↑ Top</a>
+
+  <!-- ══════════════════════════════════════
+       FOOTER — Shared Template
+  ══════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="home.html" class="nav-logo">Equal<span>World</span></a>
+        <p>A student-led project dedicated to raising awareness about SDG 10 — Reducing Inequalities — and inspiring action at every level.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="ais.html">Action Simulator</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Student 3</h4>
+        <ul>
+          <li><a href="pageEditor_ST3.html" target="_blank">Page Editor</a></li>
+          <li><a href="validation_ST3.html" target="_blank">Validation</a></li>
+          <li><a href="#" target="_blank">Accessibility Report</a></li>
+        </ul>
+        <p style="font-size:0.8rem; margin-top:0.75rem; opacity:0.55;">Senuth Hansira Karunaratne — Student 3<br/>Feedback &amp; Team Page</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 EqualWorld — SDG 10 Group Coursework | University of Westminster</span>
+      <span>Built with purpose. Designed for change.</span>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════
+       JAVASCRIPT
+  ══════════════════════════════════════ -->
+  <script>
+    // ── Mobile nav toggle ──
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+
+    // ── Keyboard accessibility for member blocks ──
+    // Allows Enter/Space key to trigger the same hover reveal effect
+    const memberBlocks = document.querySelectorAll('.member-block');
+    memberBlocks.forEach(block => {
+      block.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          // Toggle a CSS class to keep overlay open on keyboard activation
+          this.classList.toggle('expanded');
+        }
+      });
+    });
+  </script>
+
+  <!-- Extra style for keyboard-expanded state -->
+  <style>
+    .member-block.expanded .member-thumb { border-color: var(--accent); box-shadow: 0 10px 35px rgba(192,57,43,0.25); }
+    .member-block.expanded .member-thumb img { transform: scale(1.05); opacity: 0.88; }
+    .member-block.expanded .member-overlay { max-height:400px; padding: 1.2rem; }
+  </style>
+
+</body>
+</html>
