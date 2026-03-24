@@ -4,63 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Action Impact Simulator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    
 
     <style>
-        /* ── Green Theme Variables ── */
-        :root {
-            --primary-dark:    #1A3A1A;
-            --primary:         #2D5A2D;
-            --primary-light:   #3D6B3D;
-            --accent-fresh:    #4CAF50;
-            --accent-mint:     #81C784;
-            --accent-glow:     #A5D6A7;
-            --bg-light:        #E8F5E9;
-            --bg-card:         #FFFFFF;
-            --text-dark:       #1A3A1A;
-            --text-muted:      #2E5C2E;
-            --white:           #FFFFFF;
-            --shadow-sm:       0 6px 14px rgba(30, 70, 30, 0.08);
-            --shadow-md:       0 12px 28px rgba(30, 70, 30, 0.12);
-            --shadow-lg:       0 20px 35px -8px rgba(40, 80, 40, 0.2);
-            --transition:      all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-
-            /* Legacy variable aliases used by component styles */
-            --primary-color:   #4CAF50;
-            --secondary-color: #3D6B3D;
-            --accent-color:    #81C784;
-            --surface-color:   #FFFFFF;
-            --bg-color:        #E8F5E9;
-            --border-color:    rgba(76, 175, 80, 0.25);
-            --radius-lg:       1.2rem;
-            --radius-md:       1rem;
-            --radius-sm:       0.75rem;
-            --shadow-soft:     0 6px 14px rgba(30, 70, 30, 0.08);
-            --shadow-hover:    0 20px 35px -8px rgba(40, 80, 40, 0.2);
-            --transition-speed: 0.25s;
-        }
+        
 
         /* ── Base ── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-light);
-            color: var(--text-dark);
+            background: #E8F5E9;
+            color: #1A3A1A;
             line-height: 1.5;
             min-height: 100vh;
         }
 
         /* ── Header ── */
         .site-header {
-            background: var(--white);
-            box-shadow: var(--shadow-sm);
+            background: #FFFFFF;
+            box-shadow: 0 6px 14px rgba(30, 70, 30, 0.08);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 3px solid var(--accent-fresh);
+            border-bottom: 3px solid #4CAF50;
         }
 
         .header-inner {
@@ -80,7 +49,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.9rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            background: linear-gradient(135deg, #1A3A1A 0%, #3D6B3D 100%);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
@@ -88,7 +57,7 @@
 
         .tagline {
             font-size: 0.7rem;
-            color: var(--accent-fresh);
+            color: #4CAF50;
             background: rgba(76, 175, 80, 0.12);
             padding: 0.25rem 0.8rem;
             border-radius: 30px;
@@ -105,11 +74,11 @@
 
         .navbar a {
             text-decoration: none;
-            color: var(--text-dark);
+            color: #1A3A1A;
             font-weight: 550;
             padding: 0.5rem 0;
             position: relative;
-            transition: var(--transition);
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             font-size: 0.95rem;
         }
 
@@ -118,13 +87,13 @@
             position: absolute;
             bottom: 0; left: 0;
             width: 0; height: 2.5px;
-            background: var(--accent-fresh);
+            background: #4CAF50;
             border-radius: 4px;
             transition: width 0.25s ease;
         }
 
         .navbar a:hover::after { width: 100%; }
-        .navbar a:hover { color: var(--accent-fresh); }
+        .navbar a:hover { color: #4CAF50; }
 
         /* ── Main layout ── */
         .container {
@@ -139,7 +108,7 @@
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: var(--primary-dark);
+            color: #1A3A1A;
             margin-bottom: 0.6rem;
         }
 
@@ -147,10 +116,10 @@
         .simulator-container {
             max-width: 800px;
             margin: 0 auto;
-            background-color: var(--surface-color);
+            background-color: #FFFFFF;
             padding: 2.5rem;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-hover);
+            border-radius: 1.2rem;
+            box-shadow: 0 20px 35px -8px rgba(40, 80, 40, 0.2);
         }
 
         .action-list {
@@ -172,7 +141,7 @@
         .action-points {
             font-size: 1.2rem;
             font-weight: 800;
-            color: var(--primary-color);
+            color: #4CAF50;
             margin-left: auto;
             padding-left: 1rem;
             white-space: nowrap;
@@ -182,19 +151,19 @@
             display: flex;
             align-items: center;
             padding: 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            transition: background-color var(--transition-speed) ease;
+            border: 1px solid #C8E6C9;
+            border-radius: 0.5rem;
+            transition: background-color 0.25s ease;
             cursor: pointer;
         }
 
         .action-item:hover {
-            background-color: var(--bg-color);
+            background-color: #E8F5E9;
         }
 
         .action-item.selected {
             background-color: rgba(76, 175, 80, 0.12);
-            border-color: var(--accent-fresh);
+            border-color: #4CAF50;
         }
 
         .action-item input[type="checkbox"] {
@@ -202,28 +171,28 @@
             width: 20px;
             height: 20px;
             cursor: pointer;
-            accent-color: var(--primary-color);
+            accent-color: #4CAF50;
         }
 
         .action-details { flex: 1; }
 
         .action-title {
             font-weight: 700;
-            color: var(--text-dark);
+            color: #1A3A1A;
             margin-bottom: 0.2rem;
         }
 
         .action-desc {
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: #666666;
         }
 
         .score-board {
             text-align: center;
-            background: linear-gradient(135deg, var(--accent-fresh), var(--primary-light));
-            color: var(--white);
+            background: linear-gradient(135deg, #4CAF50, #3D6B3D);
+            color: #FFFFFF;
             padding: 2rem;
-            border-radius: var(--radius-md);
+            border-radius: 1rem;
             margin-top: 2rem;
         }
 
@@ -243,11 +212,11 @@
 
         /* ── Footer ── */
         .main-footer {
-            background: var(--primary-dark);
-            color: var(--bg-light);
+            background: #1A3A1A;
+            color: #FFFFFF;
             padding: 2.5rem 2rem 1.5rem;
             margin-top: 4rem;
-            border-top: 1px solid var(--accent-mint);
+            border-top: 1px solid #81C784;
         }
 
         .footer-inner {
@@ -262,12 +231,12 @@
         }
 
         .footer-links a {
-            color: var(--accent-mint);
+            color: #81C784;
             text-decoration: none;
-            transition: var(--transition);
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
-        .footer-links a:hover { color: var(--accent-glow); }
+        .footer-links a:hover { color: #4CAF50; }
 
         .footer-bottom {
             text-align: center;
@@ -299,20 +268,24 @@
     <header class="site-header">
         <div class="header-inner">
             <div class="brand">
-                <span class="brand-name">ActFor<span style="color:var(--accent-fresh)">SDG10</span></span>
-                <span class="tagline">SDG 10</span>
+                <img src="image/inequality2.jpeg" alt="ALIGN logo - equal access emblem representing digital inclusion" class="brand-logo">
+                <span class="brand-name">ALIGN</span>
+                <span class="tagline">SDG 10 · Reduce Inequalities</span>
             </div>
-            <nav class="navbar">
+            <nav class="navbar" aria-label="Main navigation">
                 <ul>
-                    <li><a href="home.html">Home</a></li>
+                    <li><a href="home.html" >Home</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="ais.html">Simulator</a></li>
-                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="ais.html" class="active-nav">Impact Simulator</a></li>
                     <li><a href="team.html">Team</a></li>
-                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="profile.html">User Profile</a></li>
                     <li><a href="sitemap.html">Sitemap</a></li>
                 </ul>
             </nav>
+            <div class="header-actions">
+                <button class="outline-btn" aria-label="Get involved with ALIGN">Get Involved</button>
+            </div>
         </div>
     </header>
 
@@ -397,24 +370,13 @@
 
     <!-- ── FOOTER ── -->
     <footer class="main-footer">
-        <div class="footer-inner">
-            <div class="footer-links">
-                <p>&copy; 2026 Climate Action Group. All rights reserved.</p>
-                <p>Student Editors:
-                    <a href="pageEditor_ST1.html">ST1</a> |
-                    <a href="pageEditor_ST2.html">ST2</a> |
-                    <a href="pageEditor_ST3.html">ST3</a> |
-                    <a href="pageEditor_ST4.html">ST4</a>
-                </p>
-                <p>Validations:
-                    <a href="validation_ST1.html">ST1</a> |
-                    <a href="validation_ST2.html">ST2</a> |
-                    <a href="validation_ST3.html">ST3</a> |
-                    <a href="validation_ST4.html">ST4</a>
-                </p>
-                <p class="accessibility-statement">This website is designed with accessibility and inclusivity in mind, ensuring a readable font, high contrast, and semantic structure.</p>
-            </div>
+        <div class="footer-container">
+            <div class="footer-col"><h3>Explore</h3><p><a href="home.html">Home</a></p><p><a href="gallery.html">Gallery</a></p></div>
+            <div class="footer-col"><h3>About</h3><p><a href="team.html">Team</a></p></div>
+            <div class="footer-col"><h3>Legal</h3><p><a href="pageEditor_ST2.html">Page Editor</a></p><p><a href="validation_ST2.html">Validation</a></p></div>
+            <div class="footer-col"><h3>Contact</h3><p>Email: align@email.com</p><div class="student-details"><p><strong>Student:</strong> M.S.M.Zaidh </p><p><strong>ID:</strong> 20241116</p></div></div>
         </div>
+        <p class="footer-bottom">© 2026 ALIGN - Promoting Equality and Inclusion</p>
     </footer>
 
     <script src="script.js"></script>
