@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ============================================================
+         PAGE EDITOR — Student 3
+         File: pageEditor_ST3.html
+         Author: Senuth Hansira Karunaratne — Student 3
+         Description: Individual page editor documenting technical
+         implementation, accessibility, JANET compliance, and
+         group meeting contribution log.
+    ============================================================ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor — Senuth Hansira Karunaratne | Team Align | EqualWorld  </title>
+
+    <!-- External CSS — official template stylesheet from zip -->
+    <link rel="stylesheet" href="css/pageEditor_validator.css">
+
+</head>
+<body>
+
+    <!-- ============================================================
+         HEADER — Consistent with team website
+    ============================================================ -->
+    <header id="top">
+        <h1>EqualWorld — SDG 10: Reducing Inequalities</h1>
+        <nav>
+            <a href="home.html" style="color:#e67e22;">Home</a> |
+            <a href="ais.html" style="color:#e67e22;">Action Simulator</a> |
+            <a href="gallery.html" style="color:#e67e22;">Gallery</a> |
+            <a href="profile.html" style="color:#e67e22;">Profile</a> |
+            <a href="feedback.html" style="color:#e67e22;">Feedback</a> |
+            <a href="team.html" style="color:#e67e22;">Team</a> |
+            <a href="sitemap.html" style="color:#e67e22;">Sitemap</a> |
+            <a href="content_ST3.html" style="color:#e67e22;">Our SDG</a>
+        </nav>
+    </header>
+
+    <!-- ============================================================
+         STUDENT IDENTITY SECTION
+    ============================================================ -->
+    <section class="stud">
+        <h2>Senuth Hansira Karunaratne &nbsp;|&nbsp; Team Align &nbsp;|&nbsp; EqualWorld &nbsp;|&nbsp;  Student 3 — Feedback &amp; Team Page</h2>
+    </section>
+
+    <!-- ============================================================
+         MAIN CONTAINER — main content + sidebar
+    ============================================================ -->
+    <div class="container">
+
+        <!-- ── MAIN CONTENT ── -->
+        <main>
+
+            <!-- ============================================================
+                 SECTION 1: FEEDBACK PAGE
+            ============================================================ -->
+            <section>
+                <h2 id="feedback">Feedback &amp; Programme Directory Page</h2>
+
+                <h3>Technical Description</h3>
+                <p>
+                    The Feedback &amp; Programme Directory page is divided into three key sections: a scrollable programme directory, a ratings and reviews section, and a JavaScript-enhanced feedback form. The page uses the shared HTML template structure with a <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code>. Each section is wrapped in a semantic <code>&lt;section&gt;</code> element with an <code>aria-labelledby</code> attribute pointing to its heading, ensuring screen readers can identify each region clearly.
+                </p>
+                <p>
+                    The scrollable programme directory uses CSS <code>overflow-y: auto</code> with a fixed <code>max-height: 480px</code> to create a scrollable container. Inside it, a CSS Grid with <code>grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))</code> arranges the four programme cards responsively without needing media queries. Each programme card is an <code>&lt;article&gt;</code> element containing a thumbnail image, a heading, description, and a button. Card hover effects use CSS <code>transition</code> on <code>box-shadow</code> and <code>transform: translateY</code> to lift the card on hover.
+                </p>
+                <p>
+                    The feedback form uses <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> to group fields into two logical groups — Personal Details and Feedback Details. Input types used include <code>type="text"</code>, <code>type="email"</code>, <code>type="tel"</code>, <code>type="date"</code>, <code>type="datetime-local"</code>, a <code>&lt;textarea&gt;</code> with <code>maxlength="500"</code>, a <code>&lt;select&gt;</code> dropdown, and a <code>&lt;datalist&gt;</code> for searchable country name suggestions. A CSS Grid with <code>grid-template-columns: 1fr 1fr</code> creates a two-column layout for paired fields on wider screens.
+                </p>
+
+                <h3>JavaScript Implementation</h3>
+                <p>
+                    JavaScript powers three interactive features. First, a live character counter listens to the <code>input</code> event on the message textarea and updates the remaining character count dynamically, changing colour to orange near 50 characters and red near 10. Second, a form validation function <code>submitForm()</code> checks all required fields on button click — using a regular expression to validate the email format, verifying dropdowns are not empty, and ensuring the message is at least 20 characters long. Error messages are shown next to invalid fields using DOM class manipulation. Third, real-time error clearing attaches <code>input</code> and <code>change</code> listeners to each field so errors disappear as the user corrects them. On successful validation, a confirmation message is revealed using <code>classList.add('show')</code>.
+                </p>
+
+                <h3>Accessibility</h3>
+                <p>
+                    Every image includes a descriptive <code>alt</code> attribute. All form fields have associated <code>&lt;label&gt;</code> elements linked via matching <code>for</code> and <code>id</code> attributes, ensuring screen readers announce the correct label when a field is focused. The <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> groupings provide additional context for assistive technologies. The confirmation message uses <code>role="alert"</code> so screen readers announce it automatically when revealed. The scrollable region carries an <code>aria-label</code> to identify it. Colour contrast between text and backgrounds meets WCAG 2.1 AA standards throughout.
+                </p>
+
+                <h3>Link to the Validation Page</h3>
+                <p>
+                    <a href="validation_ST3.html#val-feedback" target="_blank">View validation evidence for the Feedback Page</a> — jumps directly to the validation screenshot for this page.
+                </p>
+
+                <h3>Link to the Page</h3>
+                <p>
+                    <a href="feedback.html" target="_blank">View the Feedback &amp; Programme Directory Page</a>
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 2: TEAM PAGE
+            ============================================================ -->
+            <section>
+                <h2 id="team">Team Page</h2>
+
+                <h3>Technical Description</h3>
+                <p>
+                    The Team Page presents all four group members using an interactive thumbnail grid. The layout uses CSS Grid with <code>grid-template-columns: repeat(4, 1fr)</code> on desktop, collapsing to two columns on tablet and one column on mobile via media queries. Each team member is a <code>&lt;div class="member-block"&gt;</code> containing a thumbnail container, a hover-reveal overlay panel, and a name bar.
+                </p>
+                <p>
+                    The thumbnail image uses <code>object-fit: cover</code> to fill its container uniformly. The hover-reveal overlay expands below the thumbnail using a CSS <code>transition</code> on <code>max-height</code> — animating from <code>0</code> to <code>400px</code> smoothly on hover. The overlay uses a dark background so text remains readable. The name bar below the thumbnail is always visible with a dark background and light text. On hover, the card border colour and box-shadow both transition to provide clear visual feedback.
+                </p>
+                <p>
+                    A numbered student badge is positioned using <code>position: absolute</code> at the top-left of each thumbnail, styled as a circle using <code>border-radius: 50%</code>.
+                </p>
+
+                <h3>JavaScript Implementation</h3>
+                <p>
+                    JavaScript handles keyboard accessibility by listening for <code>keydown</code> events on each member block. When the Enter or Space key is pressed, a CSS class <code>expanded</code> is toggled, replicating the same visual state as the CSS hover effect. This ensures keyboard-only users receive the same interactive experience as mouse users. The mobile navigation toggle is also controlled by JavaScript, adding and removing an <code>open</code> class on the navigation link list.
+                </p>
+
+                <h3>Accessibility</h3>
+                <p>
+                    Each team member block has <code>tabindex="0"</code> so it can receive keyboard focus. A <code>role="button"</code> attribute communicates its interactive nature to screen readers. Each block carries a descriptive <code>aria-label</code> identifying the team member. All images include meaningful <code>alt</code> text. Decorative badge elements use <code>aria-hidden="true"</code>. A visible focus style matching the hover effect ensures keyboard users can see which element is active at all times.
+                </p>
+
+                <h3>Link to the Validation Page</h3>
+                <p>
+                    <a href="validation_ST3.html#val-team" target="_blank">View validation evidence for the Team Page</a> — jumps directly to the validation screenshot for this page.
+                </p>
+
+                <h3>Link to the Page</h3>
+                <p>
+                    <a href="team.html" target="_blank">View the Team Page</a>
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 3: CONTENT PAGE
+            ============================================================ -->
+            <section>
+                <h2 id="content">Content Page</h2>
+
+                <h3>Technical Description</h3>
+                <p>
+                    The Content Page follows the shared HTML template with a <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code>. The main area uses a two-column CSS Grid — <code>grid-template-columns: 220px 1fr</code> — placing a sticky internal navigation sidebar on the left and the article content on the right. The sidebar uses <code>position: sticky</code> with <code>top: 84px</code> so it stays visible while the user scrolls through the long page.
+                </p>
+                <p>
+                    The content is divided into seven clearly labelled <code>&lt;section&gt;</code> elements, each with a unique <code>id</code> that serves as an anchor target for internal navigation links. One <code>&lt;h1&gt;</code> provides the page title, followed by <code>&lt;h2&gt;</code> and <code>&lt;h3&gt;</code> sub-headings in correct hierarchical order. At least four relevant images are included, each styled with <code>object-fit: contain</code>, <code>width: 100%</code>, <code>height: auto</code>, <code>border-radius</code>, and <code>box-shadow</code>. A two-column image grid uses <code>grid-template-columns: 1fr 1fr</code> for side-by-side image layouts. The "Go to Top" button is a plain HTML anchor <code>&lt;a href="#top"&gt;</code> with <code>position: fixed</code> — no JavaScript required.
+                </p>
+
+                <h3>Accessibility</h3>
+                <p>
+                    The internal navigation sidebar uses an <code>&lt;aside&gt;</code> element with <code>aria-label="Page sections navigation"</code>. All images carry descriptive <code>alt</code> text. The active navigation link is marked with <code>aria-current="page"</code>. Headings follow a strict logical hierarchy. The page uses high-contrast colours throughout, and the layout collapses to a single column on mobile devices via a media query.
+                </p>
+
+                <h3>Link to the Validation Page</h3>
+                <p>
+                    <a href="validation_ST3.html#val-content" target="_blank">View validation evidence for the Content Page</a> — jumps directly to the validation screenshot for this page.
+                </p>
+
+                <h3>Link to the Page</h3>
+                <p>
+                    <a href="content_ST3.html" target="_blank">View the Content Page</a>
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 4: CHALLENGES AND LESSONS LEARNED
+            ============================================================ -->
+            <section>
+                <h2 id="challenge">Challenges and Lessons Learned</h2>
+
+                <h3>Challenge 1 — JavaScript Form Validation</h3>
+                <p>
+                    Building a form validator that displayed error messages next to specific fields — rather than a generic browser alert — was more complex than expected. Managing multiple error states simultaneously while also clearing them in real time required careful planning of DOM selection and conditional logic.
+                </p>
+                <p>
+                    <strong>Resolution:</strong> I created a reusable helper function <code>setError(fieldId, errorId, show)</code> that adds and removes error classes and messages. I then attached separate <code>input</code> and <code>change</code> event listeners to each field to clear errors as the user corrected them, providing a smooth and responsive experience.
+                </p>
+
+                <h3>Challenge 2 — Team Page Hover Overlay Clipping</h3>
+                <p>
+                    The initial approach placed the overlay inside the thumbnail using <code>position: absolute</code>. However, the <code>overflow: hidden</code> property needed on the thumbnail to clip the image was also clipping the overlay, preventing it from fully expanding and showing all content.
+                </p>
+                <p>
+                    <strong>Resolution:</strong> I restructured the overlay to sit below the thumbnail as a sibling element. Using <code>max-height: 0</code> transitioning to <code>max-height: 400px</code> on hover created a smooth reveal effect without any clipping, and the layout became cleaner overall.
+                </p>
+
+                <h3>Challenge 3 — Scrollable Section Height</h3>
+                <p>
+                    Setting the right fixed <code>max-height</code> for the scrollable programme section was difficult — too small cut off content, too large defeated the purpose of scrolling.
+                </p>
+                <p>
+                    <strong>Resolution:</strong> After testing multiple values, I settled on <code>480px</code> — tall enough to show around two rows of cards and clearly suggest more content is available, without dominating the page layout.
+                </p>
+
+                <h3>Lessons Learned</h3>
+                <p>
+                    These challenges taught me to plan the DOM structure carefully before writing CSS — particularly when properties like <code>overflow: hidden</code> affect child elements unexpectedly. I also learned that reusable JavaScript functions significantly reduce code repetition and make logic easier to maintain and debug.
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 5: JANET COMPLIANCE
+            ============================================================ -->
+            <section>
+                <h2 id="compliance">Compliance</h2>
+                <p>
+                    As a student at the University of Westminster — a Janet-connected institution — this website must comply with Janet's Acceptable Use Policy (AUP) and relevant UK legal frameworks. <a href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html" target="_blank">See the lecture notes for more details on compliance.</a>
+                </p>
+
+                <h3>Appropriate and Ethical Content</h3>
+                <p>
+                    All content across the Feedback, Team, and Content pages is original, educational, and directly relevant to SDG 10 — Reducing Inequalities. No content promotes harm, discrimination, or illegal activity. The website fully aligns with Janet's AUP requirement for ethical and lawful use of the network, supporting the University of Westminster's educational mission.
+                </p>
+
+                <h3>Data Protection and GDPR</h3>
+                <p>
+                    The feedback form collects personal data including name, email address, and telephone number. In compliance with the General Data Protection Regulation (GDPR) and the UK Data Protection Act 2018, this form is for educational demonstration only — no data is transmitted to or stored on any server. This ensures no personal data is processed without proper consent, in line with Janet's data protection responsibilities.
+                </p>
+
+                <h3>Copyright and Third-Party Resources</h3>
+                <p>
+                    All images are sourced from Unsplash — a royalty-free platform — and used in accordance with their licence terms. Google Fonts are loaded via their official CDN. All external resources are fully referenced in the References section, complying with copyright law and Janet's responsible use guidelines.
+                </p>
+
+                <h3>Accessibility Compliance</h3>
+                <p>
+                    All pages I developed follow WCAG 2.1 AA guidelines through semantic HTML, descriptive alt text, keyboard navigation, and high-contrast colours — complying with the Public Sector Bodies Accessibility Regulations 2018 and the Equality Act 2010, as required for Janet-connected institutions.
+                </p>
+
+                <h3>Network Security</h3>
+                <p>
+                    No malicious code or unauthorised data collection has been included in any page. The website does not attempt to access or misuse network resources, complying with the Computer Misuse Act 1990 and Janet's security policies. Any vulnerabilities found would be reported to the institution's IT department as required by Janet CSIRT guidelines.
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 6: GROUP MEETINGS AND CONTRIBUTION LOG
+            ============================================================ -->
+            <section>
+                <h2 id="group">Group Meetings and Individual Contribution Log</h2>
+                <p>The following table documents my individual engagement with group work. Two meetings have taken place so far; remaining rows will be updated as meetings occur.</p>
+
+                Requirements:
+                <ul>
+                    <li>A minimum of six (6) group meetings must be recorded.</li>
+                    <li>Each student must provide their own account of the meetings.</li>
+                    <li>The log must focus on individual contribution, not just group activity.</li>
+                </ul>
+                <br>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="6">Group Meetings and Contribution Log</th>
+                        </tr>
+                        <tr>
+                            <th>Meeting</th>
+                            <th>Date &amp; Time</th>
+                            <th>Format</th>
+                            <th>Objective</th>
+                            <th>Attended</th>
+                            <th>Your Individual Contribution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>18 Feb 2026</td>
+                            <td>Online</td>
+                            <td>Agree SDG and assign roles</td>
+                            <td>Yes</td>
+                            <td>Agreed on SDG 10 — Reducing Inequalities as our chosen goal. Accepted responsibility for the Feedback &amp; Programme Directory page and the Team page.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>7 Mar 2026</td>
+                            <td>Online</td>
+                            <td>Review Home Page design &amp; progress review</td>
+                            <td>Yes</td>
+                            <td>Reviewed Ruhansa's Home Page design and gave feedback on the card layout. Shared progress on the Feedback page — confirmed the scrollable section and form structure were in place.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 7: REFERENCES
+            ============================================================ -->
+            <section>
+                <h2 id="ref">References</h2>
+                <ul class="ref">
+                    <li>University of Westminster (2026) <i>4COSC011W Web Design and Development — Module Lecture Notes and Coursework Specification.</i> Blackboard Ultra. Available at: <a href="https://learning.westminster.ac.uk/ultra/courses/_104670_1/outline" target="_blank">https://learning.westminster.ac.uk/ultra/courses/_104670_1/outline</a> (Last accessed: March 2026).</li>
+
+                    <li>University of Westminster (2025) <i>Janet Compliance — Regulations, Policies and Accessibility.</i> ECS Intranet. Available at: <a href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html" target="_blank">https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html</a> (Last accessed: February 2026).</li>
+
+                    <li>World Wide Web Consortium (W3C) (2018) <i>Web Content Accessibility Guidelines (WCAG) 2.1.</i> Available at: <a href="https://www.w3.org/TR/WCAG21/" target="_blank">https://www.w3.org/TR/WCAG21/</a> (Last accessed: March 2026).</li>
+
+                    <li>MDN Web Docs (2026) <i>HTML: HyperText Markup Language — Reference Documentation.</i> Mozilla. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">https://developer.mozilla.org/en-US/docs/Web/HTML</a> (Last accessed: March 2026).</li>
+
+                    <li>MDN Web Docs (2026) <i>CSS: Cascading Style Sheets — Reference Documentation.</i> Mozilla. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">https://developer.mozilla.org/en-US/docs/Web/CSS</a> (Last accessed: March 2026).</li>
+
+                    <li>MDN Web Docs (2026) <i>JavaScript — Reference Documentation.</i> Mozilla. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">https://developer.mozilla.org/en-US/docs/Web/JavaScript</a> (Last accessed: March 2026).</li>
+
+                    <li>Unsplash (2026) <i>Free High-Resolution Royalty-Free Photos.</i> Available at: <a href="https://unsplash.com" target="_blank">https://unsplash.com</a> (Last accessed: March 2026).</li>
+
+                    <li>Google Fonts (2026) <i>Playfair Display &amp; Source Serif 4 Typefaces.</i> Available at: <a href="https://fonts.google.com" target="_blank">https://fonts.google.com</a> (Last accessed: March 2026).</li>
+
+                    <li>United Nations (2026) <i>Sustainable Development Goal 10 — Reduced Inequalities.</i> Available at: <a href="https://sdgs.un.org/goals/goal10" target="_blank">https://sdgs.un.org/goals/goal10</a> (Last accessed: March 2026).</li>
+                </ul>
+            </section>
+
+            <!-- Go to Top -->
+            <p class="top"><a href="#top">Go top</a></p>
+
+        </main>
+
+        <!-- ── SIDEBAR ── -->
+        <aside>
+            <h3>Core pages developed:</h3>
+            <ul class="top-level-ul">
+                <li><strong>Student 3 — Senuth</strong></li>
+                <ul>
+                    <li><a href="#feedback">Feedback Page</a></li>
+                    <li><a href="#team">Team Page</a></li>
+                    <li><a href="#content">Content Page</a></li>
+                </ul>
+                <li><a href="#challenge">Challenges and Lessons Learned</a></li>
+                <li><a href="#compliance">Compliance</a></li>
+                <li><a href="#group">Group Meetings Log</a></li>
+                <li><a href="#ref">References</a></li>
+            </ul>
+        </aside>
+
+    </div><!-- end .container -->
+
+    <!-- ============================================================
+         FOOTER — Consistent with team website
+    ============================================================ -->
+    <footer>
+        <p>
+            &copy; 2026 EqualWorld — SDG 10 Group Coursework | University of Westminster &nbsp;|&nbsp;
+            <a href="pageEditor_ST3.html" style="color:#e67e22;">Page Editor</a> &nbsp;|&nbsp;
+            <a href="validation_ST3.html" style="color:#e67e22;">Validation</a> &nbsp;|&nbsp;
+            Senuth Hansira Karunaratne — Student 3
+        </p>
+    </footer>
+
+</body>
+</html>
