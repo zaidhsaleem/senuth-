@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ============================================================
+         PAGE EDITOR — Student 2
+         File: pageEditor_ST2.html
+         Author: M.S.M.Zaidh — Student 2
+         Description: Individual page editor documenting technical
+         implementation, accessibility, JANET compliance, and
+         group meeting contribution log.
+    ============================================================ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor — M.S.M.Zaidh | ALIGN</title>
+
+    <!-- Google Fonts — matches site-wide typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- External CSS — official template stylesheet from zip -->
+    <link rel="stylesheet" href="css/pageEditor_validator.css">
+
+    <!-- Green theme overrides — align with the ALIGN gallery CSS design system -->
+    <style>
+        :root {
+            --primary-dark:  #1A3A1A;
+            --primary:       #2D5A2D;
+            --primary-light: #3D6B3D;
+            --accent-fresh:  #4CAF50;
+            --accent-mint:   #81C784;
+            --accent-glow:   #A5D6A7;
+            --bg-light:      #E8F5E9;
+            --text-dark:     #1A3A1A;
+            --white:         #FFFFFF;
+            --shadow-sm:     0 6px 14px rgba(30, 70, 30, 0.08);
+            --transition:    all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* ── Header ── */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            border-bottom: 3px solid var(--accent-fresh);
+            padding: 1rem 2rem;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+        }
+
+        header nav a {
+            color: var(--accent-fresh) !important;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            padding: 0.2rem 0;
+            position: relative;
+        }
+
+        header nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent-fresh);
+            border-radius: 4px;
+            transition: width 0.25s ease;
+        }
+
+        header nav a:hover::after { width: 100%; }
+        header nav a:hover { color: var(--primary-light) !important; }
+
+        /* ── Student identity banner ── */
+        .stud {
+            background: linear-gradient(135deg, var(--accent-fresh) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 1rem 2rem;
+        }
+
+        .stud h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* ── Links inside content ── */
+        main a,
+        aside a {
+            color: var(--accent-fresh);
+            transition: var(--transition);
+        }
+
+        main a:hover,
+        aside a:hover {
+            color: var(--primary-light);
+        }
+
+        /* ── Table header ── */
+        thead tr:first-child th {
+            background: linear-gradient(135deg, var(--accent-fresh), var(--primary-light));
+            color: var(--white);
+        }
+
+        thead tr:nth-child(2) th {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--primary-dark);
+            color: #C8E6C9;
+            border-top: 1px solid var(--accent-mint);
+            padding: 1.2rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--accent-mint) !important;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        footer a:hover {
+            color: var(--accent-glow) !important;
+        }
+
+        /* ── Go-top link ── */
+        .top a {
+            color: var(--accent-fresh);
+            font-weight: 600;
+        }
+
+        /* ── Sidebar accent ── */
+        aside {
+            border-left: 3px solid var(--accent-fresh);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         HEADER — Consistent with team website
+    ============================================================ -->
+    <header id="top">
+        <h1>ALIGN — SDG 10: Reducing Inequalities</h1>
+        <nav>
+            <a href="home.html">Home</a> |
+            <a href="ais.html">Action Simulator</a> |
+            <a href="gallery.html">Gallery</a> |
+            <a href="profile.html">Profile</a> |
+            <a href="feedback.html">Feedback</a> |
+            <a href="team.html">Team</a> |
+            <a href="sitemap.html">Sitemap</a>
+        </nav>
+    </header>
+
+    <!-- ============================================================
+         STUDENT IDENTITY SECTION
+    ============================================================ -->
+    <section class="stud">
+        <h2>M.S.M.Zaidh &nbsp;|&nbsp; ALIGN &nbsp;|&nbsp; Student 2 — Content Page, Action Impact Simulator &amp; Splash Screen</h2>
+    </section>
+
+    <!-- ============================================================
+         MAIN CONTAINER — main content + sidebar
+    ============================================================ -->
+    <div class="container">
+
+        <!-- ── MAIN CONTENT ── -->
+        <main>
+
+            <!-- ============================================================
+                 SECTION 1: CONTENT PAGE
+            ============================================================ -->
+            <section>
+                <h2 id="content">Content Page — Digital Inequality &amp; Access</h2>
+
+                <h3>Technical Description</h3>
+                <p>
+                    The Content Page (<code>content_ST2.html</code>) is built using semantic HTML5 elements to produce a well-structured, long-form article. The page uses an <code>&lt;article&gt;</code> tag as the primary content wrapper, divided into four <code>&lt;section&gt;</code> elements — each assigned a unique <code>id</code> — covering: The Digital Divide, Infrastructure &amp; Connectivity, Affordability Barriers, and Digital Literacy &amp; Education. Each section id acts as an anchor target for the in-page navigation.
+                </p>
+                <p>
+                    An in-page <code>&lt;nav&gt;</code> element at the top of the article contains anchor links using <code>href="#section-id"</code>, allowing users to jump directly to any section without scrolling manually. This improves usability significantly on a long-form page. The CSS styling relies entirely on shared <code>style.css</code> custom properties such as <code>var(--primary-color)</code>, <code>var(--surface-color)</code>, and <code>var(--radius-lg)</code>, ensuring visual consistency across the whole website without duplicating global rules.
+                </p>
+                <p>
+                    Two additional components were defined in a page-specific embedded <code>&lt;style&gt;</code> block: a <strong>stat box</strong>, which uses <code>display: flex</code> and a <code>linear-gradient</code> background to present key statistics prominently; and a <strong>highlight block</strong>, which uses a left border and italic styling to draw attention to important quotes and mission statements. Side-by-side images use <code>calc(50% - 1rem)</code> widths inside a <code>flex-wrap: wrap</code> container, so they stack automatically on smaller screens without any additional media queries.
+                </p>
+
+                <h3>Accessibility</h3>
+                <p>
+                    All images on the page carry descriptive <code>alt</code> attributes that convey context to screen reader users. The in-page navigation uses a semantic <code>&lt;nav&gt;</code> element, making it identifiable as a navigation landmark by assistive technologies. Heading levels follow a strict logical hierarchy from <code>&lt;h2&gt;</code> down to <code>&lt;h3&gt;</code>, aiding screen reader users in understanding the page structure. Colour contrast between all text and background combinations meets WCAG 2.1 AA standards. The fixed Go To Top button provides a clear, keyboard-accessible method for users to return to the top of the page without excessive scrolling.
+                </p>
+
+                <h3>Link to the Validation Page</h3>
+                <p>
+                    <a href="validation_ST2.html#contentVal" target="_blank">View validation evidence for the Content Page</a> — jumps directly to the validation screenshot for this page.
+                </p>
+
+                <h3>Link to the Page</h3>
+                <p>
+                    <a href="content_ST2.html" target="_blank">View the Digital Inequality &amp; Access Content Page</a>
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 2: ACTION IMPACT SIMULATOR
+            ============================================================ -->
+            <section>
+                <h2 id="simulator">Action Impact Simulator Page</h2>
+
+                <h3>Technical Description</h3>
+                <p>
+                    The Action Impact Simulator page (<code>ais.html</code>) is structured around a single <code>&lt;div class="simulator-container"&gt;</code> placed inside the shared <code>&lt;main class="container"&gt;</code> layout. Six action cards are built as <code>&lt;label&gt;</code> elements each wrapping an <code>&lt;input type="checkbox"&gt;</code>, a small image, an <code>action-details</code> div, and a visible point badge — creating a fully clickable card that toggles its checkbox without requiring a separate click target.
+                </p>
+                <p>
+                    Each checkbox carries a <code>data-score</code> attribute holding its point value. The JavaScript reads these values using <code>getAttribute('data-score')</code> and accumulates a total on every <code>change</code> event. The score is displayed inside a <code>.score-board</code> div styled with a CSS <code>linear-gradient</code> background. Three impact levels are defined by score thresholds — each triggering a different message and a dynamic background colour change applied directly to <code>document.body.style.background</code> via JavaScript, satisfying the requirement that background changes must be handled through JavaScript and not CSS alone.
+                </p>
+                <p>
+                    A <code>.selected</code> CSS class is toggled onto checked cards using <code>classList.add</code> and <code>classList.remove</code> inside the event handler, providing clear visual feedback to the user when an action is selected. The page-specific styles — including <code>.action-img</code>, <code>.action-points</code>, <code>.score-board</code>, and <code>.selected</code> — are all defined inside an embedded <code>&lt;style&gt;</code> block on this page rather than in the global stylesheet.
+                </p>
+
+                <h3>JavaScript Implementation</h3>
+                <p>
+                    The core logic runs inside a <code>DOMContentLoaded</code> event listener. A <code>calculateScore()</code> function iterates over all checkboxes using <code>querySelectorAll('.impact-cb')</code>, sums the scores of checked items, updates the score display with a brief CSS scale animation, and then evaluates the total against three thresholds to assign the correct impact level message and page background. Each checkbox has a <code>change</code> event listener attached that calls <code>calculateScore()</code>, so the UI updates in real time with every selection or deselection.
+                </p>
+
+                <h3>Accessibility</h3>
+                <p>
+                    Using <code>&lt;label&gt;</code> elements as card wrappers ensures that clicking anywhere on a card — including the image or text — activates the associated checkbox, improving usability for all users. Each image carries a descriptive <code>alt</code> attribute. The score board uses clear, high-contrast colours at all three impact levels. The page inherits the shared navigation structure with keyboard-accessible links, and all interactive elements are reachable via the Tab key.
+                </p>
+
+                <h3>Link to the Validation Page</h3>
+                <p>
+                    <a href="validation_ST2.html#simulatorVal" target="_blank">View validation evidence for the Action Impact Simulator Page</a> — jumps directly to the validation screenshot for this page.
+                </p>
+
+                <h3>Link to the Page</h3>
+                <p>
+                    <a href="ais.html" target="_blank">View the Action Impact Simulator Page</a>
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 3: SPLASH SCREEN
+            ============================================================ -->
+            <section>
+                <h2 id="splash">Splash Screen Page</h2>
+
+                <h3>Technical Description</h3>
+                <p>
+                    The Splash Screen (<code>splash.html</code>) uses a single full-viewport <code>&lt;div class="splash-screen"&gt;</code> that covers the screen using <code>position: fixed</code>, <code>width: 100%</code>, and <code>height: 100%</code>. It is layered using three stacked child elements: a <code>.splash-background</code> div carrying the CSS gradient, a <code>.splash-overlay</code> div providing a semi-transparent dark overlay for text readability, and a <code>.splash-content</code> div holding all visible content including the title, loader, mission statement, countdown, group members list, and skip button.
+                </p>
+                <p>
+                    The animated loader uses three <code>&lt;div class="loader-dot"&gt;</code> elements styled as circles with staggered <code>animation-delay</code> values on a <code>loaderBounce</code> keyframe animation, creating a bouncing dots effect without any JavaScript. The countdown display uses a <code>&lt;span id="countdown"&gt;</code> updated each second by a JavaScript <code>setInterval</code> timer. A <code>&lt;meta http-equiv="refresh"&gt;</code> tag provides a fallback redirect in case JavaScript is disabled. The skip button calls a <code>skipIntro()</code> function that clears the interval and immediately triggers the redirect.
+                </p>
+                <p>
+                    All entrance animations — title slide-in, content fade-in, and staggered element reveals — are handled purely through CSS <code>@keyframes</code> and <code>animation-delay</code>, keeping the JavaScript focused solely on the countdown and redirect logic.
+                </p>
+
+                <h3>Accessibility</h3>
+                <p>
+                    The skip button provides users — particularly those using assistive technologies or who prefer reduced motion — with immediate control to bypass the timed intro. The group members list uses a semantic <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> structure. Text contrast against the dark overlay meets WCAG 2.1 AA requirements. The page is fully responsive, with font sizes and padding scaling down at <code>768px</code> and <code>480px</code> breakpoints via media queries.
+                </p>
+
+                <h3>Link to the Validation Page</h3>
+                <p>
+                    <a href="validation_ST2.html#splashVal" target="_blank">View validation evidence for the Splash Screen Page</a> — jumps directly to the validation screenshot for this page.
+                </p>
+
+                <h3>Link to the Page</h3>
+                <p>
+                    <a href="splash.html" target="_blank">View the Splash Screen Page</a>
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 4: CHALLENGES AND LESSONS LEARNED
+            ============================================================ -->
+            <section>
+                <h2 id="challenge">Challenges and Lessons Learned</h2>
+
+                <h3>Challenge 1 — Responsive Side-by-Side Images</h3>
+                <p>
+                    On the Content Page, the two side-by-side images overflowed their container on narrow screens when given fixed widths. The layout broke below around 600px.
+                </p>
+                <p>
+                    <strong>Resolution:</strong> I wrapped both images in a <code>display: flex</code> container with <code>flex-wrap: wrap</code> and set each image width to <code>calc(50% - 1rem)</code>. This allowed them to sit side by side on wider screens and automatically stack to full width on smaller viewports, removing the need for explicit media queries.
+                </p>
+
+                <h3>Challenge 2 — Action Simulator Background Change via JavaScript</h3>
+                <p>
+                    Initially the background colour changes on the simulator were handled using CSS class toggling, which the requirements explicitly stated must be done through JavaScript instead.
+                </p>
+                <p>
+                    <strong>Resolution:</strong> I moved the background logic entirely into the <code>calculateScore()</code> JavaScript function, applying gradient values directly to <code>document.body.style.background</code> based on the score threshold reached. This satisfied the requirement and also made the three impact levels much more visually distinct from each other.
+                </p>
+
+                <h3>Challenge 3 — Splash Screen Countdown and Meta Refresh Conflict</h3>
+                <p>
+                    The <code>&lt;meta http-equiv="refresh"&gt;</code> tag and the JavaScript <code>setInterval</code> countdown occasionally caused a double-redirect on slower connections, where the meta refresh fired slightly before the JavaScript redirect completed its fade-out transition.
+                </p>
+                <p>
+                    <strong>Resolution:</strong> I set the meta refresh duration to match the countdown value exactly, and added a <code>500ms</code> delay inside the JavaScript redirect to allow the CSS fade-out transition to complete visually before the page change. This ensured a smooth experience in all tested browsers.
+                </p>
+
+                <h3>Lessons Learned</h3>
+                <p>
+                    These challenges reinforced the importance of reading requirements carefully before deciding on an implementation approach — particularly around which features must be JavaScript-driven versus CSS-driven. I also learned that testing across different screen widths early in development catches layout issues before they become embedded in the structure and harder to fix.
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 5: JANET COMPLIANCE
+            ============================================================ -->
+            <section>
+                <h2 id="compliance">Compliance</h2>
+                <p>
+                    As a student at the University of Westminster — a Janet-connected institution — this website must comply with Janet's Acceptable Use Policy (AUP) and relevant UK legal frameworks. <a href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html" target="_blank">See the lecture notes for more details on compliance.</a>
+                </p>
+
+                <h3>Appropriate and Ethical Content</h3>
+                <p>
+                    All content across the Content Page, Action Impact Simulator, and Splash Screen is original, educational, and directly relevant to SDG 10 — Reducing Inequalities. No content promotes harm, discrimination, or illegal activity. The website fully aligns with Janet's AUP requirement for ethical and lawful use of the network.
+                </p>
+
+                <h3>Data Protection and GDPR</h3>
+                <p>
+                    None of the three pages I developed collect, transmit, or store any personal data. The Action Impact Simulator processes checkbox selections entirely client-side without sending any data to a server. This ensures full compliance with the General Data Protection Regulation (GDPR) and the UK Data Protection Act 2018.
+                </p>
+
+                <h3>Copyright and Third-Party Resources</h3>
+                <p>
+                    All images used across my pages are sourced from Unsplash under their open licence, permitting free use without attribution requirements. All external resources are fully referenced in the References section in line with copyright law and Janet's responsible use guidelines.
+                </p>
+
+                <h3>Accessibility Compliance</h3>
+                <p>
+                    All pages I developed follow WCAG 2.1 AA guidelines through semantic HTML, descriptive alt text, keyboard-accessible interactive elements, and high-contrast colour choices — complying with the Public Sector Bodies Accessibility Regulations 2018 and the Equality Act 2010, as required for Janet-connected institutions.
+                </p>
+
+                <h3>Network Security</h3>
+                <p>
+                    No malicious code or unauthorised data collection has been included in any of my pages. The website does not attempt to access or misuse network resources, complying with the Computer Misuse Act 1990 and Janet's security policies.
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 6: GROUP MEETINGS AND CONTRIBUTION LOG
+            ============================================================ -->
+            <section>
+                <h2 id="group">Group Meetings and Individual Contribution Log</h2>
+                <p>The following table documents my individual engagement with group work throughout this project.</p>
+
+                Requirements:
+                <ul>
+                    <li>A minimum of six (6) group meetings must be recorded.</li>
+                    <li>Each student must provide their own account of the meetings.</li>
+                    <li>The log must focus on individual contribution, not just group activity.</li>
+                </ul>
+                <br>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="6">Group Meetings and Contribution Log — M.S.M.Zaidh (ST2)</th>
+                        </tr>
+                        <tr>
+                            <th>Meeting</th>
+                            <th>Date &amp; Time</th>
+                            <th>Format</th>
+                            <th>Objective</th>
+                            <th>Attended</th>
+                            <th>My Individual Contribution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>3 Feb 2026</td>
+                            <td>Face-to-face</td>
+                            <td>Agree on SDG topic and assign roles</td>
+                            <td>Yes</td>
+                            <td>Agreed on SDG 10 — Reducing Inequalities as our project theme. Accepted responsibility for the Content Page, Action Impact Simulator, and Splash Screen.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>17 Feb 2026</td>
+                            <td>Online</td>
+                            <td>Review shared design and colour scheme</td>
+                            <td>Yes</td>
+                            <td>Reviewed the shared style.css variables and confirmed my pages would use them consistently. Discussed the splash screen colour scheme with the group.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>03 Mar 2026</td>
+                            <td>Hybrid</td>
+                            <td>Progress check on all pages</td>
+                            <td>Yes</td>
+                            <td>Presented draft versions of the Content Page and Splash Screen. Received feedback on the simulator card layout and incorporated the image requirement for each card.</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>[Date]</td>
+                            <td>[Format]</td>
+                            <td>[Objective]</td>
+                            <td>[Yes/No]</td>
+                            <td>[Your contribution]</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>[Date]</td>
+                            <td>[Format]</td>
+                            <td>[Objective]</td>
+                            <td>[Yes/No]</td>
+                            <td>[Your contribution]</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>[Date]</td>
+                            <td>[Format]</td>
+                            <td>[Objective]</td>
+                            <td>[Yes/No]</td>
+                            <td>[Your contribution]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 7: REFERENCES
+            ============================================================ -->
+            <section>
+                <h2 id="ref">References</h2>
+                <ul class="ref">
+                    <li>University of Westminster (2026) <i>4COSC011W Web Design and Development — Module Lecture Notes and Coursework Specification.</i> Blackboard Ultra. Available at: <a href="https://learning.westminster.ac.uk/ultra/courses/_104670_1/outline" target="_blank">https://learning.westminster.ac.uk/ultra/courses/_104670_1/outline</a> (Last accessed: March 2026).</li>
+
+                    <li>University of Westminster (2025) <i>Janet Compliance — Regulations, Policies and Accessibility.</i> ECS Intranet. Available at: <a href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html" target="_blank">https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html</a> (Last accessed: February 2026).</li>
+
+                    <li>World Wide Web Consortium (W3C) (2018) <i>Web Content Accessibility Guidelines (WCAG) 2.1.</i> Available at: <a href="https://www.w3.org/TR/WCAG21/" target="_blank">https://www.w3.org/TR/WCAG21/</a> (Last accessed: March 2026).</li>
+
+                    <li>MDN Web Docs (2026) <i>HTML: HyperText Markup Language — Reference Documentation.</i> Mozilla. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">https://developer.mozilla.org/en-US/docs/Web/HTML</a> (Last accessed: March 2026).</li>
+
+                    <li>MDN Web Docs (2026) <i>CSS: Cascading Style Sheets — Reference Documentation.</i> Mozilla. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">https://developer.mozilla.org/en-US/docs/Web/CSS</a> (Last accessed: March 2026).</li>
+
+                    <li>MDN Web Docs (2026) <i>JavaScript — Reference Documentation.</i> Mozilla. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">https://developer.mozilla.org/en-US/docs/Web/JavaScript</a> (Last accessed: March 2026).</li>
+
+                    <li>Unsplash (2026) <i>Free High-Resolution Royalty-Free Photos.</i> Available at: <a href="https://unsplash.com" target="_blank">https://unsplash.com</a> (Last accessed: March 2026).</li>
+
+                    <li>International Telecommunication Union (2023) <i>Measuring digital development: Facts and figures 2023.</i> Available at: <a href="https://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx" target="_blank">https://www.itu.int</a> (Last accessed: March 2026).</li>
+
+                    <li>United Nations (2026) <i>Sustainable Development Goal 10 — Reduced Inequalities.</i> Available at: <a href="https://sdgs.un.org/goals/goal10" target="_blank">https://sdgs.un.org/goals/goal10</a> (Last accessed: March 2026).</li>
+                </ul>
+            </section>
+
+            <!-- Go to Top -->
+            <p class="top"><a href="#top">Go top</a></p>
+
+        </main>
+
+        <!-- ── SIDEBAR ── -->
+        <aside>
+            <h3>Core pages developed:</h3>
+            <ul class="top-level-ul">
+                <li><strong>Student 2 — M.S.M.Zaidh</strong></li>
+                <ul>
+                    <li><a href="#content">Content Page</a></li>
+                    <li><a href="#simulator">Action Impact Simulator</a></li>
+                    <li><a href="#splash">Splash Screen</a></li>
+                </ul>
+                <li><a href="#challenge">Challenges and Lessons Learned</a></li>
+                <li><a href="#compliance">Compliance</a></li>
+                <li><a href="#group">Group Meetings Log</a></li>
+                <li><a href="#ref">References</a></li>
+            </ul>
+        </aside>
+
+    </div><!-- end .container -->
+
+    <!-- ============================================================
+         FOOTER — Consistent with team website
+    ============================================================ -->
+    <footer>
+        <p>
+            &copy; 2026 ALIGN — SDG 10 Group Coursework | University of Westminster &nbsp;|&nbsp;
+            <a href="pageEditor_ST2.html">Page Editor</a> &nbsp;|&nbsp;
+            <a href="validation_ST2.html">Validation</a> &nbsp;|&nbsp;
+            M.S.M.Zaidh — Student 2
+        </p>
+    </footer>
+
+</body>
+</html>

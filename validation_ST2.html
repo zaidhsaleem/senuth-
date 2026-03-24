@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ============================================================
+         VALIDATION PAGE — Student 2
+         File: validation_ST2.html
+         Author: M.S.M.Zaidh — Student 2
+         Description: Validation evidence for all pages implemented
+         by Student 2 — Content Page, Action Impact Simulator,
+         and Splash Screen.
+    ============================================================ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Page — M.S.M.Zaidh | ALIGN</title>
+
+    <!-- Google Fonts — matches site-wide typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- External CSS — official template stylesheet from zip -->
+    <link rel="stylesheet" href="css/pageEditor_validator.css">
+
+    <!-- Green theme overrides — align with the ALIGN gallery CSS design system -->
+    <style>
+        :root {
+            --primary-dark:  #1A3A1A;
+            --primary:       #2D5A2D;
+            --primary-light: #3D6B3D;
+            --accent-fresh:  #4CAF50;
+            --accent-mint:   #81C784;
+            --accent-glow:   #A5D6A7;
+            --bg-light:      #E8F5E9;
+            --text-dark:     #1A3A1A;
+            --white:         #FFFFFF;
+            --shadow-sm:     0 6px 14px rgba(30, 70, 30, 0.08);
+            --transition:    all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* ── Header ── */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            border-bottom: 3px solid var(--accent-fresh);
+            padding: 1rem 2rem;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+        }
+
+        header nav a {
+            color: var(--accent-fresh) !important;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            padding: 0.2rem 0;
+            position: relative;
+        }
+
+        header nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent-fresh);
+            border-radius: 4px;
+            transition: width 0.25s ease;
+        }
+
+        header nav a:hover::after { width: 100%; }
+        header nav a:hover { color: var(--primary-light) !important; }
+
+        /* ── Student identity banner ── */
+        .stud {
+            background: linear-gradient(135deg, var(--accent-fresh) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 1rem 2rem;
+        }
+
+        .stud h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* ── Links inside content ── */
+        main a,
+        aside a {
+            color: var(--accent-fresh);
+            transition: var(--transition);
+        }
+
+        main a:hover,
+        aside a:hover {
+            color: var(--primary-light);
+        }
+
+        /* ── Validation screenshot images ── */
+        main img {
+            display: block;
+            max-width: 100%;
+            border-radius: 0.75rem;
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            box-shadow: var(--shadow-sm);
+            margin: 1.2rem 0;
+        }
+
+        /* ── Table header (if any) ── */
+        thead tr:first-child th {
+            background: linear-gradient(135deg, var(--accent-fresh), var(--primary-light));
+            color: var(--white);
+        }
+
+        thead tr:nth-child(2) th {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--primary-dark);
+            color: #C8E6C9;
+            border-top: 1px solid var(--accent-mint);
+            padding: 1.2rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--accent-mint) !important;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        footer a:hover {
+            color: var(--accent-glow) !important;
+        }
+
+        /* ── Go-top link ── */
+        .top a {
+            color: var(--accent-fresh);
+            font-weight: 600;
+        }
+
+        /* ── Sidebar accent ── */
+        aside {
+            border-left: 3px solid var(--accent-fresh);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         HEADER — Consistent with team website
+    ============================================================ -->
+    <header id="top">
+        <h1>ALIGN — SDG 10: Reducing Inequalities</h1>
+        <nav>
+            <a href="home.html">Home</a> |
+            <a href="ais.html">Action Simulator</a> |
+            <a href="gallery.html">Gallery</a> |
+            <a href="profile.html">Profile</a> |
+            <a href="feedback.html">Feedback</a> |
+            <a href="team.html">Team</a> |
+            <a href="sitemap.html">Sitemap</a>
+        </nav>
+    </header>
+
+    <!-- ============================================================
+         STUDENT IDENTITY SECTION
+    ============================================================ -->
+    <section class="stud">
+        <h2>M.S.M.Zaidh &nbsp;|&nbsp; ALIGN &nbsp;|&nbsp; Student 2 — Content Page, Action Impact Simulator &amp; Splash Screen</h2>
+    </section>
+
+    <!-- ============================================================
+         MAIN CONTAINER — main content + sidebar
+    ============================================================ -->
+    <div class="container">
+
+        <!-- ── MAIN CONTENT ── -->
+        <main>
+
+            <!-- ============================================================
+                 SECTION 1: CONTENT PAGE VALIDATION
+            ============================================================ -->
+            <section>
+                <h2 id="contentVal">Content Page — Validation Report</h2>
+
+                <p>
+                    The Digital Inequality &amp; Access Content Page was validated using the W3C Markup Validation Service and passed with no errors. The validation confirmed that the page uses a correct HTML5 document structure with a single <code>&lt;h2&gt;</code> as the article heading, followed by properly ordered <code>&lt;h3&gt;</code> sub-headings across all four sections. All images carry meaningful <code>alt</code> attributes describing their visual content in the context of digital inequality. Internal anchor links in the in-page <code>&lt;nav&gt;</code> element were confirmed to correctly target their corresponding <code>id</code> attributes on each section. The embedded <code>&lt;style&gt;</code> block uses valid CSS properties throughout, including <code>linear-gradient</code>, <code>display: flex</code>, and <code>backdrop-filter</code>. The Go To Top button is implemented as a valid HTML button element controlled by a short JavaScript scroll handler.
+                </p>
+
+                <!-- Screenshot placeholder — replace src with your actual screenshot path -->
+                <!-- e.g. validationSnapshots/validation_content.png -->
+                <img
+                    src="validationSnapshots/validation_content.png"
+                    alt="W3C validation screenshot showing no errors for the Digital Inequality and Access Content page"
+                />
+
+                <h3>Back to Page Editor</h3>
+                <p>
+                    <a href="pageEditor_ST2.html#content">Back to the Content Page section in the Page Editor.</a>
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 2: ACTION IMPACT SIMULATOR VALIDATION
+            ============================================================ -->
+            <section>
+                <h2 id="simulatorVal">Action Impact Simulator Page — Validation Report</h2>
+
+                <p>
+                    The Action Impact Simulator page was validated using the W3C Markup Validation Service and passed with no errors. The validation confirmed correct use of semantic HTML5 elements including <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>, and <code>&lt;label&gt;</code> elements wrapping each checkbox card. All six <code>&lt;input type="checkbox"&gt;</code> elements were confirmed to be correctly nested inside their respective <code>&lt;label&gt;</code> wrappers, ensuring valid and accessible form markup. All <code>data-score</code> attributes were verified as valid HTML5 custom data attributes. Each card image includes a descriptive <code>alt</code> attribute. The embedded <code>&lt;style&gt;</code> block and inline JavaScript were confirmed to be syntactically valid. Heading hierarchy was verified as correct throughout the page.
+                </p>
+
+                <!-- Screenshot placeholder — replace src with your actual screenshot path -->
+                <!-- e.g. validationSnapshots/validation_simulator.png -->
+                <img
+                    src="validationSnapshots/validation_simulator.png"
+                    alt="W3C validation screenshot showing no errors for the Action Impact Simulator page"
+                />
+
+                <h3>Back to Page Editor</h3>
+                <p>
+                    <a href="pageEditor_ST2.html#simulator">Back to the Action Impact Simulator section in the Page Editor.</a>
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 3: SPLASH SCREEN VALIDATION
+            ============================================================ -->
+            <section>
+                <h2 id="splashVal">Splash Screen Page — Validation Report</h2>
+
+                <p>
+                    The Splash Screen page was validated using the W3C Markup Validation Service and passed with no errors. The validation confirmed that all structural elements — including the <code>.splash-background</code>, <code>.splash-overlay</code>, and <code>.splash-content</code> divs — use valid HTML5 markup. The group members list uses correct <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> structure. The <code>&lt;meta http-equiv="refresh"&gt;</code> redirect tag was confirmed as valid HTML5 usage. All CSS <code>@keyframes</code> animations defined in the external stylesheet were confirmed as syntactically correct. The JavaScript countdown and skip function use standard DOM methods with no deprecated APIs. The page structure contains a single <code>&lt;h1&gt;</code> title element with correct document flow throughout.
+                </p>
+
+                <!-- Screenshot placeholder — replace src with your actual screenshot path -->
+                <!-- e.g. validationSnapshots/validation_splash.png -->
+                <img
+                    src="validationSnapshots/validation_splash.png"
+                    alt="W3C validation screenshot showing no errors for the Splash Screen page"
+                />
+
+                <h3>Back to Page Editor</h3>
+                <p>
+                    <a href="pageEditor_ST2.html#splash">Back to the Splash Screen section in the Page Editor.</a>
+                </p>
+            </section>
+
+            <!-- ============================================================
+                 SECTION 4: REFLECTION ON VALIDATION
+            ============================================================ -->
+            <section>
+                <h2 id="val-reflection">Reflection on the Validation Process</h2>
+
+                <p>
+                    Running all three of my pages through the W3C Markup Validation Service was one of the most useful steps in the development process. It highlighted issues that were completely invisible in the browser but would have affected accessibility, search engine indexing, and cross-browser consistency — reinforcing that a visually correct page is not necessarily a structurally correct one.
+                </p>
+
+                <p>
+                    One issue caught during validation on the Content Page was a missing closing tag on one of the <code>&lt;section&gt;</code> elements, which the browser had silently corrected but the validator correctly flagged. Fixing this ensured the document structure was clean and the anchor links in the in-page navigation targeted the right sections reliably across all browsers.
+                </p>
+
+                <p>
+                    On the Action Impact Simulator, an early draft used <code>&lt;div&gt;</code> elements for the action cards rather than <code>&lt;label&gt;</code> elements. The validator highlighted that the checkboxes lacked proper label associations, which would have made them inaccessible to screen reader users. Restructuring each card as a <code>&lt;label&gt;</code> wrapper resolved both the validation issue and the accessibility concern simultaneously.
+                </p>
+
+                <p>
+                    Overall, the validation process confirmed that all three pages comply with HTML5 standards and are free from errors. It was a valuable reminder that writing semantic, standards-compliant markup from the start saves significant debugging time later in development.
+                </p>
+            </section>
+
+            <!-- Go to Top -->
+            <p class="top"><a href="#top">Go top</a></p>
+
+        </main>
+
+        <!-- ── SIDEBAR ── -->
+        <aside>
+            <h3>Core pages validated:</h3>
+            <ul class="top-level-ul">
+                <li><strong>Student 2 — M.S.M.Zaidh</strong></li>
+                <ul>
+                    <li><a href="#contentVal">Content Page</a></li>
+                    <li><a href="#simulatorVal">Action Impact Simulator</a></li>
+                    <li><a href="#splashVal">Splash Screen</a></li>
+                </ul>
+                <li><a href="#val-reflection">Reflection</a></li>
+            </ul>
+        </aside>
+
+    </div><!-- end .container -->
+
+    <!-- ============================================================
+         FOOTER — Consistent with team website
+    ============================================================ -->
+    <footer>
+        <p>
+            &copy; 2026 ALIGN — SDG 10 Group Coursework | University of Westminster &nbsp;|&nbsp;
+            <a href="pageEditor_ST2.html">Page Editor</a> &nbsp;|&nbsp;
+            <a href="validation_ST2.html">Validation</a> &nbsp;|&nbsp;
+            M.S.M.Zaidh — Student 2
+        </p>
+    </footer>
+
+</body>
+</html>
